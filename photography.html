@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photography - Aesthora</title>
+    <link rel="stylesheet" href="rstyle.css">
+    <style>
+      /* navbar */
+/* Base layout */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  /* gap: 5px; spacing between image and text */
+}
+
+.logo img {
+  height: 80px; /* adjust this to make it not too tall or small */
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.logo span {
+  font-family:'Edwardian Script ITC', cursive;
+  font-size: 40px;  /* slightly smaller than before if needed */
+  font-weight: bold;
+  color: #1f0901;
+  line-height: 1;
+}
+
+
+/* Toggle button (mobile) */
+.menu-toggle {
+  display: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #111;
+}
+
+/* Navigation */
+nav {
+  flex-grow: 1;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  position: relative;
+}
+
+.nav-links a {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 20px;
+  text-decoration: none;
+  color: #111;
+  padding: 10px;
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #cd346f;
+  border: 2px solid #cd346f;
+  border-radius: 5px;
+}
+
+/* Dropdown */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  min-width: 160px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 1000;
+}
+
+/* When dropdown is active (added via JS) */
+.dropdown.open .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Links */
+.dropdown-menu li a {
+  display: block;
+  padding: 10px 16px;
+  color: #333;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #f2f2f2;
+  color: #b80668;
+}
+
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+    padding: 50px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: flex-start;
+    position: absolute;
+    top: 65px;
+    right: 0;
+    background: white;
+    width: 100%;
+    display: none;
+    padding: 10px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .nav-links li {
+    width: 100%;
+  }
+
+  .nav-links a {
+    width: 100%;
+    padding: 12px 20px;
+  }
+
+  /* Fix dropdown on mobile */
+  .dropdown-menu {
+    position: relative;
+    top: 0;
+    left: 0;
+    box-shadow: none;
+    background: #f9f9f9;
+    border-radius: 0;
+    padding-left: 15px;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+  }
+
+  .dropdown.open .dropdown-menu {
+    opacity: 1;
+    max-height: 500px; /* enough to show all links */
+    margin-top: 0;
+  }
+
+  .dropdown-menu li a {
+    padding: 10px 16px;
+  }
+}
+    </style>
+</head>
+<body>
+    
+   <!-- navbar -->
+
+
+<header class="navbar glass-blur">
+  <div class="logo">
+    <img src="images/icon_ss-removebg-preview.png" alt="" width="30%"><span>Aesthora</span>
+  </div>
+  <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+  <nav>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+     <li class="dropdown">
+  <a href="#" class="dropdown-toggle" tabindex="0">Gallery ▾</a>
+  <ul class="dropdown-menu">
+    <li><a href="photography.html">Photography</a></li>
+    <li><a href="arts.html">Art</a></li>
+    <li><a href="calligraphy.html">Calligraphy</a></li>
+  </ul>
+</li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- navbar end -->
+
+<!-- carousal  -->
+    <div class="carousel">
+
+        <div class="list">
+
+            <div class="item" style="background-image: url(./imags/tiger.jpg);">
+                <div class="content">
+                    <!-- <div class="title">SLIDER</div> -->
+                    <div class="name">Tiger</div>
+                    <div class="des">Amber eyes glint in the shadows, sharp as daggers, reading every rustle of leaves, every breath of wind for signs of prey.</div>
+                    <div class="btn">
+                        <!-- <button>See More</button> -->
+                        <button>Subscribe</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item" style="background-image: url(./imags/markhor.jpg);">
+                
+                <div class="content">
+                    <!-- <div class="title">SLIDER</div> -->
+                    <div class="name">MARKHOR</div>
+                    <div class="des">Twisting horns spiral like ancient scrolls atop the markhor’s noble head, each curve telling stories of rugged cliffs and icy winds.</div>
+                    <div class="btn">
+                        <!-- <button>See More</button> -->
+                        <button>Subscribe</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="item" style="background-image: url(./imags/ocean4.jpg);">
+
+                <div class="content">
+                    <!-- <div class="title">SLIDER</div> -->
+                    <div class="name">ocean</div>
+                    <div class="des">The blue ocean stretches endlessly, its surface shimmering under the golden sun, while beneath lies a vibrant kingdom teeming with life.</div>
+                    <div class="btn">
+                        <!-- <button>See More</button> -->
+                        <button>Subscribe</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="item" style="background-image: url(./imags/beer.jpg);">
+                
+                <div class="content">
+                    <!-- <div class="title">SLIDER</div> -->
+                    <div class="name">BEER</div>
+                    <div class="des">Thick white fur shields the polar bear from bitter Arctic winds, while black skin beneath absorbs the sun’s faint warmth.</div>
+                    <div class="btn">
+                        <!-- <button>See More</button> -->
+                        <button>Subscribe</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="item" style="background-image: url(./imags/deer1.jpg);">
+                
+                <div class="content">
+                    <!-- <div class="title">SLIDER</div> -->
+                    <div class="name">DEER</div>
+                    <div class="des">Its tawny coat blends seamlessly with dappled leaves, nature’s perfect camouflage against predators’ searching gaze.</div>
+                    <div class="btn">
+                        <!-- <button>See More</button> -->
+                        <button>Subscribe</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="item" style="background-image: url(./imags/garden\ 2.avif);">
+                
+                <div class="content">
+                     <!-- <div class="title">SLIDER</div> -->
+                    <div class="name">FLOWERS</div>
+                    <div class="des">Flowers are nature’s way of smiling—each petal a soft whisper of color, fragrance, and delicate beauty.</div>
+                    <div class="btn">
+                        <!-- <button>See More</button> -->
+                        <button>Subscribe</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="item" style="background-image: url(./imags/cat1.avif);">
+                
+                <div class="content">
+                    <!-- <div class="title">SLIDER</div> -->
+                    <div class="name">CAT</div>
+                    <div class="des">A cat’s fur is a tapestry of softness, each strand catching the light in subtle hues of silver or gold as it arches its back in a luxurious stretch.</div>
+                    <div class="btn">
+                        <!-- <button>See More</button> -->
+                        <button>Subscribe</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="item" style="background-image: url(./imags/forest1.cms);">
+                
+                <div class="content">
+                    <!-- <div class="title">SLIDER</div> -->
+                    <div class="name">FOREST</div>
+                    <div class="des">Dense forests are deep, mysterious realms where sunlight struggles to reach the ground, and silence is broken only by the occasional rustle of unseen life..</div>
+                    <div class="btn">
+                        
+                        <button>Subscribe</button>
+                    </div>
+                </div>
+
+            </div>
+
+           
+        </div>
+
+        <!--next prev button-->
+        <div class="arrows">
+            <button class="prev"><</button>
+            <button class="next">></button>
+        </div>
+
+
+        <!-- time running -->
+        <div class="timeRunning"></div>
+
+      </div>
+<br>
+
+    <h1 class="title" style="font-family: Edwardian Script ITC;">Welcome to the Art of Photography</h1>
+<!-- AI image generator -->
+  <section class="image-generate-section" data-aos="fade-up">
+    <div style="text-align: center; margin: 40px 0;">
+    <a href="imageGen.html" class="generate-btn">✨ Generate Your Own Image</a>
+    </div>
+ </section>
+
+ <!-- masonry layout -->
+
+  <div class="masonry">
+
+   <div class="masonry-item" data-voice="This is the beauty of nature.">
+    <img src="./imags/nature3.jpg" alt="Nature">
+   </div>
+
+    <div class="masonry-item" data-voice="Wild and free like the horse.">
+    <img src="./imags/horse1.jpg" alt="Horse">
+   </div>
+    
+   <div class="masonry-item" data-voice="The colorful parrot sings with joy.">
+    <img src="./imags/parrot.avif" alt="Parrot">
+   </div>
+
+   <div class="masonry-item" data-voice="A beautiful blooming flower.">
+  <img src="./imags/flower4.jpeg" alt="">
+   </div>
+
+  <div class="masonry-item" data-voice="Freshness in every petal.">
+  <img src="./imags/flower2.jpg" alt="">
+  </div>
+
+ <div class="masonry-item" data-voice="Nature at its calmest.">
+  <img src="./imags/nature.jpg" alt="">
+  </div>
+
+  <div class="masonry-item" data-voice="A place waiting to be explored.">
+  <img src="./imags/travel.avif" alt="">
+  </div>
+
+<div class="masonry-item" data-voice="An artistic feline creation.">
+  <img src="./imags/cat art.jpg" alt="">
+</div>
+
+<div class="masonry-item" data-voice="A chirping bird in the wild.">
+  <img src="./imags/bird1.jpg" alt="">
+</div>
+
+<div class="masonry-item" data-voice="A deep forest filled with secrets.">
+  <img src="./imags/nature5.jpg" alt="">
+</div>
+
+<div class="masonry-item" data-voice="A hummingbird in motion.">
+  <img src="./imags/h.bird.jpg" alt="">
+</div>
+
+<div class="masonry-item" data-voice="The king of the jungle.">
+  <img src="./imags/loin1.jpg" alt="">
+</div>
+
+<div class="masonry-item" data-voice="Delicate wings of a butterfly.">
+  <img src="./imags/buterfly.jpg" alt="">
+</div>
+
+<div class="masonry-item" data-voice="A curious little ladybug.">
+  <img src="./imags/ladybug.jpg" alt="">
+</div>
+
+<div class="masonry-item" data-voice="Mystery within the forest.">
+  <img src="./imags/forest.webp" alt="">
+</div>
+
+<div class="masonry-item" data-voice="A wild bear in its habitat.">
+  <img src="./imags/beer.jpg" alt="">
+</div>
+
+<div class="masonry-item" data-voice="Silence of the desert.">
+  <img src="./imags/desert.jpg" alt="">
+</div>
+
+<div class="masonry-item" data-voice="A misty woodland path.">
+  <img src="./imags/forest1.cms" alt="">
+</div>
+
+<div class="masonry-item" data-voice="A lone wolf howling.">
+  <img src="./imags/wolf.avif" alt="">
+</div>
+
+<div class="masonry-item" data-voice="Vibrant bloom of life.">
+  <img src="./imags/FLOWER5.webp" alt="">
+</div>
+
+<div class="masonry-item" data-voice="Magic of Cappadocia's sky.">
+  <img src="./imags/cappadocia.jpg" alt="">
+</div>
+
+<div class="masonry-item" data-voice="Paradise of the Maldives.">
+  <img src="./imags/maldives.jpg" alt="">
+</div>
+
+<div class="masonry-item" data-voice="Majestic elephant on a journey.">
+  <img src="./imags/elephant.jpg" alt="">
+</div>
+
+<div class="masonry-item" data-voice="An eagle soaring above.">
+  <img src="./imags/eagle.avif" alt="">
+</div>
+
+<div class="masonry-item" data-voice="Colorful fish swimming freely.">
+  <img src="./imags/fishes.jpg" alt="">
+</div>
+
+<div class="masonry-item" data-voice="The parrot's melody.">
+  <img src="./imags/parrot1.jpg" alt="">
+</div>
+
+<div class="masonry-item" data-voice="A cute little bird resting.">
+  <img src="./imags/cutebird.jpg" alt="">
+</div>
+
+<div class="masonry-item" data-voice="Tropical fish in motion.">
+  <img src="./imags/FISH2.jpg" alt="">
+</div>
+
+<div class="masonry-item" data-voice="A red rose of romance.">
+  <img src="./imags/rose.jpeg" alt="">
+</div>
+
+<div class="masonry-item" data-voice="The calm waves of the sea.">
+  <img src="./imags/SEA.jpg" alt="">
+</div>
+
+<div class="masonry-item" data-voice="A fairytale castle in view.">
+  <img src="./imags/castle.jpg" alt="">
+</div>
+
+<div class="masonry-item" data-voice="The glow of a silent moon.">
+  <img src="./imags/moon.jpg" alt="">
+</div>
+
+<div class="masonry-item" data-voice="Bright and juicy oranges.">
+  <img src="./imags/orange1.jpg" alt="">
+</div>
+<div class="end-marker" id="endMarker">🌸 ~ You’ve reached the end ~ 🌸</div>
+ </div>
+
+<!-- footer -->
+
+ <footer class="footer">
+  <div class="footer-container">
+    <div class="footer-box">
+      <h3>About Us</h3>
+      <p>
+        AESTHORA is a contemporary art space blending technology, emotion, and visual storytelling. 
+        Explore creativity through colors, code, and connection.
+      </p>
+    </div>
+
+    <div class="footer-box">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-box">
+      <h3>Contact Us</h3>
+      <p>+92 3123456789</p>
+      <p>contact@aesthora.com</p>
+      <p>Art District, Dream City</p>
+    </div>
+  </div>
+
+  <div class="footer-socials">
+  <a href="https://www.facebook.com/" target="_blank">
+    <img src="images/facebook.png" alt="Facebook" class="social-icon" />
+  </a>
+  <a href="https://www.instagram.com/" target="_blank">
+    <img src="images/instagram.png" alt="Instagram" class="social-icon" />
+  </a>
+  <a href="https://www.youtube.com/" target="_blank">
+    <img src="images/youtube.png" alt="YouTube" class="social-icon" />
+  </a>
+  <a href="https://www.pinterest.com/" target="_blank">
+    <img src="images/pinterest.png" alt="Pinterest" class="social-icon" />
+  </a>
+</div>
+
+  <div class="footer-bottom">
+    © 2025 AESTHORA Art Gallery. All Rights Reserved.
+  </div>
+</footer>
+<!-- footer end -->
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const nav = document.getElementById('nav-links');
+
+  toggle.addEventListener('click', () => {
+    nav.classList.toggle('show');
+  });
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const dropdownToggle = document.querySelector(".dropdown-toggle");
+    const dropdown = dropdownToggle.parentElement;
+
+    dropdownToggle.addEventListener("click", (e) => {
+      e.preventDefault();
+      dropdown.classList.toggle("open");
+
+      // Close other dropdowns (optional for multiple dropdowns)
+      document.querySelectorAll(".dropdown").forEach((el) => {
+        if (el !== dropdown) el.classList.remove("open");
+      });
+    });
+
+    // Optional: click outside to close
+    document.addEventListener("click", (e) => {
+      if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove("open");
+      }
+    });
+  });
+</script>
+
+
+    <script src="rscript.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

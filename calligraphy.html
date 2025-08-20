@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Art Gallery - Gallery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Open+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Open+Sans&display=swap" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/> -->
+
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(to right, #fdfcfb, #e2d1c3);
+      --primary: #6f4e37;
+      --hover: #fff3ee;
+      --border-radius: 15px;
+      --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    body {
+      margin: 0;
+      /* font-family: 'Playfair Display', serif; */
+      background:radial-gradient(circle at top left, #fff4f8, #e9f0ff);
+      color: #333;
+      
+    }
+    body.dark {
+  --bg-color: #121212;
+  --text-color: #ffffff;
+  --card-bg: #1e1e1e;
+  --overlay: rgba(0, 0, 0, 0.7);
+  --box-shadow: 0 0 15px 2px #ff0000, 
+                0 0 25px 4px #ff7f00, 
+                0 0 35px 6px #ffff00, 
+                0 0 45px 8px #00ff00, 
+                0 0 55px 10px #0000ff, 
+                0 0 65px 12px #4b0082, 
+                0 0 75px 14px #8f00ff;
+}
+body {
+background: radial-gradient(circle, rgba(255,101,132,0.3), transparent 70%);
+  color: var(--text-color);
+}
+
+.card, .cardS, .cardA, .cardG {
+  background: var(--card-bg);
+  color: var(--text-color);
+  box-shadow: var(--box-shadow);
+}
+
+    .dark-mode-toggle {
+  position: absolute;
+  /* bottom: 20px; */
+  /* top: 20px; */
+  margin-top: 90px;
+  right: 20px;
+  z-index: 1000;
+  background: #333;
+  color: #fff;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+}
+
+.dark-mode-toggle:hover {
+  background: #555;
+}
+
+body.dark h1,
+body.dark h2 {
+  color: #fff !important;
+}
+  /* Base layout */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  /* gap: 5px; spacing between image and text */
+}
+
+.logo img {
+  height: 80px; /* adjust this to make it not too tall or small */
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.logo span {
+  font-family: 'Edwardian Script ITC', cursive;
+  font-size: 40px;  /* slightly smaller than before if needed */
+  font-weight: bold;
+  color: #1f0901;
+  line-height: 1;
+}
+
+/* Toggle button (mobile) */
+.menu-toggle {
+  display: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #111;
+}
+
+/* Navigation */
+nav {
+  flex-grow: 1;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  position: relative;
+}
+
+.nav-links a {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 20px;
+  text-decoration: none;
+  color: #111;
+  padding: 10px;
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #cd346f;
+  border: 2px solid #cd346f;
+  border-radius: 5px;
+}
+
+/* Dropdown */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  min-width: 160px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 1000;
+}
+
+/* When dropdown is active (added via JS) */
+.dropdown.open .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Links */
+.dropdown-menu li a {
+  display: block;
+  padding: 10px 16px;
+  color: #333;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #f2f2f2;
+  color: #b80668;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: flex-start;
+    position: absolute;
+    top: 65px;
+    right: 0;
+    background: white;
+    width: 100%;
+    display: none;
+    padding: 10px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .nav-links li {
+    width: 100%;
+  }
+
+  .nav-links a {
+    width: 100%;
+    padding: 12px 20px;
+  }
+
+  /* Fix dropdown on mobile */
+  .dropdown-menu {
+    position: relative;
+    top: 0;
+    left: 0;
+    box-shadow: none;
+    background: #f9f9f9;
+    border-radius: 0;
+    padding-left: 15px;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+  }
+
+  .dropdown.open .dropdown-menu {
+    opacity: 1;
+    max-height: 500px; /* enough to show all links */
+    margin-top: 0;
+  }
+
+  .dropdown-menu li a {
+    padding: 10px 16px;
+  }
+}
+.generate-btn {
+  display: inline-block;
+  background: linear-gradient(to right, #ffb6c1, #ff69b4);
+  color: white;
+  padding: 14px 30px;
+  border-radius: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: 0.3s ease;
+  box-shadow: 0 0 15px rgba(255, 105, 180, 0.4);
+  font-size: 18px;
+}
+
+    @keyframes pageEnter {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+
+    .header {
+      animation: pageEnter 1.4s ease-in-out;
+      text-align: center;
+      padding: 60px 20px 30px;
+    }
+
+    .header h1 {
+      font-family: 'Edwardian Script ITC', cursive;
+      font-size: 5em;
+      color: var(--primary);
+      margin-bottom: 10px;
+      animation: zoomIn 1.2s ease-in-out;
+    }
+
+    .header p {
+      font-size: 1.1em;
+      color: #555;
+      animation: fadeIn 1.4s ease-in-out;
+    }
+
+    .gallery-container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--border-radius);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      background-color: white;
+      transition: transform 0.6s ease, box-shadow 0.6s ease;
+      opacity: 0;
+      transform: scale(0.92);
+      will-change: transform;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease, filter 0.4s ease;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.03) rotateZ(-1deg);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .gallery-item:hover img {
+      animation: pulseZoom 0.8s ease-in-out;
+      filter: brightness(1.05) saturate(1.1);
+    }
+
+    @keyframes pulseZoom {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.06);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .visible {
+      opacity: 1 !important;
+      transform: scale(1);
+      transition: all 0.9s ease;
+    }
+
+    /* Optional overlay label */
+    .overlay-text {
+      position: absolute;
+      bottom: -100%;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      text-align: center;
+      font-size: 1.1em;
+      padding: 10px;
+      transition: bottom 0.5s ease;
+    }
+
+    .gallery-item:hover .overlay-text {
+      bottom: 0;
+    }
+
+    @media (max-width: 768px) {
+      .gallery-item img {
+        height: 200px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .gallery-item img {
+        height: 180px;
+      }
+    }
+    .check-bot {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  padding: 6px;
+  transition: transform 0.3s;
+}
+
+.check-bot input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+.check-bot {
+  opacity: 0;
+}
+
+.gallery-item:hover .check-bot {
+  opacity: 1;
+}
+/* modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1001;
+  padding-top: 60px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.9);
+}
+
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  border-radius: 10px;
+  animation: zoomInModal 0.6s;
+}
+
+@keyframes zoomInModal {
+  from { transform: scale(0.6); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+#caption {
+  text-align: center;
+  color: #ccc;
+  padding: 15px;
+  font-size: 1.2em;
+}
+
+.close {
+  position: absolute;
+  top: 25px;
+  right: 35px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #ff0080;
+}
+/* footer */
+.footer {
+  backdrop-filter: blur(15px);
+  background: rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ac114f;
+  padding: 50px 20px 30px;
+  font-family: 'Georgia', serif;
+  position: relative;
+  z-index: 1;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top left, rgba(255, 180, 203, 0.1), rgba(255, 255, 255, 0.05));
+  z-index: -1;
+  backdrop-filter: blur(15px);
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+  max-width: 1200px;
+  margin: auto;
+  padding-bottom: 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.footer-box h3 {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 15px;
+  padding: 10px;
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #000000;
+  letter-spacing: 1px;
+}
+
+.footer-box p,
+.footer-box ul li {
+  font-size: 15px;
+  margin: 6px 0;
+  color: #9e0940;
+}
+
+.footer-box ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-box ul li a {
+  color: #af0d41;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.footer-box ul li a:hover {
+  color: #ff9bb2;
+  text-decoration: underline;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-socials .social-icon {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  border-radius: 8px; /* or 50% for circular icons */
+  transition: transform 0.3s ease;
+}
+
+.footer-socials .social-icon:hover {
+  transform: scale(1.1);
+}
+
+
+.footer-bottom {
+  font-size: 14px;
+  color: #000000;
+  margin-top: 10px;
+  text-align: center;
+
+}
+
+
+
+  </style>
+</head>
+<body>
+  <header class="navbar glass-blur">
+  <div class="logo">
+    <img src="images/icon_ss-removebg-preview.png" alt="" width="30%"><span>Aesthora</span>
+  </div>
+  <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+  <nav>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+     <li class="dropdown">
+  <a href="#" class="dropdown-toggle" tabindex="0">Gallery ▾</a>
+  <ul class="dropdown-menu">
+    <li><a href="photography.html">Photography</a></li>
+    <li><a href="art.html">Art</a></li>
+    <li><a href="calligraphy.html">Calligraphy</a></li>
+  </ul>
+</li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+<!-- Dark Mode Toggle -->
+   <!-- <button class="dark-mode-toggle" onclick="toggleDarkMode()">🌙 Toggle Mode</button> -->
+
+  <div class="header">
+    <h1 class="animate__animated animate__zoomIn">Calligraphy Page</h1>
+    <p class="animate__animated animate__fadeIn animate__delay-1s">Explore the elegance and imagination behind each masterpiece</p>
+  </div>
+  <section class="image-generate-section" data-aos="fade-up">
+  <div style="text-align: center; margin: 40px 0;">
+    <a href="imageGen.html" class="generate-btn">✨ Generate Your Own Image</a>
+  </div>
+</section>
+
+
+  <section class="gallery-container">
+    <div class="gallery-item" data-tagline="BismillahiRahmanirRaheem">
+  <div class="check-bot"><input type="checkbox" /></div>
+  <img src="images/img01.avif" alt="Art 1">
+  <div class="overlay-text">Ink Harmony</div>
+</div>
+
+<div class="gallery-item" data-tagline="Ma Sha Allah">
+  <div class="check-bot"><input type="checkbox" /></div>
+  <img src="images/img05.jpg" alt="Art 2">
+  <div class="overlay-text">Modern Lines</div>
+</div>
+
+<div class="gallery-item" data-tagline="La ilaha illa Allahu Muhammadur Rasool Allah">
+  <div class="check-bot"><input type="checkbox" /></div>
+  <img src="images/img04.jpg" alt="Art 3">
+  <div class="overlay-text">Harmony Ink</div>
+</div>
+
+<div class="gallery-item" data-tagline="Alhamdulillah">
+  <div class="check-bot"><input type="checkbox" /></div>
+  <img src="images/img4.jpg" alt="Art 4">
+  <div class="overlay-text">Spiritual Flow</div>
+</div>
+
+<div class="gallery-item" data-tagline="Labbaik Allahumma Labbaik">
+  <div class="check-bot"><input type="checkbox" /></div>
+  <img src="images/img6.jpeg" alt="Art 5">
+  <div class="overlay-text">Classic Form</div>
+</div>
+
+<div class="gallery-item" data-tagline="Allahu Noor us Samawati wal Ard">
+  <div class="check-bot"><input type="checkbox" /></div>
+  <img src="images/img1.jpg" alt="Art 6">
+  <div class="overlay-text">Flowing Beauty</div>
+</div>
+
+<div class="gallery-item" data-tagline="Fazkuruni Azkurkum Washkuruli Wala Takfiroon">
+  <div class="check-bot"><input type="checkbox" /></div>
+  <img src="images/img7.jpg" alt="Art 7">
+  <div class="overlay-text">Golden Flourish</div>
+</div>
+
+<div class="gallery-item" data-tagline="Subhan Allahi Wabihamdihi SubhanAllah hil Azeem">
+  <div class="check-bot"><input type="checkbox" /></div>
+  <img src="images/img8.jpg" alt="Art 8">
+  <div class="overlay-text">Silk Script</div>
+</div>
+
+<div class="gallery-item" data-tagline="Watu izzu man tashaa Watu zillu man tashaa">
+  <div class="check-bot"><input type="checkbox" /></div>
+  <img src="images/img13.webp" alt="Art 9">
+  <div class="overlay-text">Classic Lines</div>
+</div>
+
+<div class="gallery-item" data-tagline="Hasbunallahu Wa ni'mal Wakeel">
+  <div class="check-bot"><input type="checkbox" /></div>
+  <img src="images/img11.webp" alt="Art 10">
+  <div class="overlay-text">Soul of Ink</div>
+</div>
+
+<div class="gallery-item" data-tagline="La ilaha illa Anta Subhanaka inni kuntu min az-zalimeen">
+  <div class="check-bot"><input type="checkbox" /></div>
+  <img src="images/img19.jpg" alt="Art 11">
+  <div class="overlay-text">Bold Motion</div>
+</div>
+
+<div class="gallery-item" data-tagline="Fa bi ayyi aalaaa i rabbikumaa tukaththibaan">
+  <div class="check-bot"><input type="checkbox" /></div>
+  <img src="images/img18.jpg" alt="Art 12">
+  <div class="overlay-text">Sacred Verse</div>
+</div>
+  </section>
+  <!-- Modal -->
+<div id="imageModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="modalImg">
+  <div id="caption"></div>
+</div>
+
+  <!-- footer -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-box">
+      <h3>About Us</h3>
+      <p>
+        AESTHORA is a contemporary art space blending technology, emotion, and visual storytelling. 
+        Explore creativity through colors, code, and connection.
+      </p>
+    </div>
+
+    <div class="footer-box">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-box">
+      <h3>Contact Us</h3>
+      <p>+92 3123456789</p>
+      <p>contact@aesthora.com</p>
+      <p>Art District, Dream City</p>
+    </div>
+  </div>
+
+  <div class="footer-socials">
+  <a href="https://www.facebook.com/" target="_blank">
+    <img src="images/facebook.png" alt="Facebook" class="social-icon" />
+  </a>
+  <a href="https://www.instagram.com/" target="_blank">
+    <img src="images/instagram.png" alt="Instagram" class="social-icon" />
+  </a>
+  <a href="https://www.youtube.com/" target="_blank">
+    <img src="images/youtube.png" alt="YouTube" class="social-icon" />
+  </a>
+  <a href="https://www.pinterest.com/" target="_blank">
+    <img src="images/pinterest.png" alt="Pinterest" class="social-icon" />
+  </a>
+</div>
+
+  <div class="footer-bottom">
+    © 2025 AESTHORA Art Gallery. All Rights Reserved.
+  </div>
+</footer>
+<!-- footer end -->
+
+<!-- <script>
+    // darkmode
+  function toggleDarkMode() {
+  document.body.classList.toggle('dark');
+}
+
+  const hoverSound = document.getElementById("hoverSound");
+
+  // Activate audio on first click anywhere (browsers block autoplay)
+  document.body.addEventListener("click", () => {
+    hoverSound.play().then(() => {
+      hoverSound.pause();
+      hoverSound.currentTime = 0;
+    }).catch(() => {});
+  }, { once: true });
+
+  // Play on gallery item hover
+  document.querySelectorAll(".gallery-item").forEach(item => {
+    item.addEventListener("mouseenter", () => {
+      hoverSound.currentTime = 0;
+      hoverSound.play().catch(e => {
+        console.warn("Sound play blocked:", e);
+      });
+    });
+  });
+
+
+
+</script> -->
+  <script> 
+  const modal = document.getElementById("imageModal");
+const modalImg = document.getElementById("modalImg");
+const captionText = document.getElementById("caption");
+const closeBtn = document.querySelector(".close");
+
+document.querySelectorAll(".gallery-item img").forEach(img => {
+  img.addEventListener("click", function () {
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    captionText.innerText = this.nextElementSibling?.innerText || this.alt;
+  });
+});
+
+closeBtn.onclick = function () {
+  modal.style.display = "none";
+};
+
+window.onclick = function (event) {
+  if (event.target === modal) {
+    modal.style.display = "none";
+  }
+};
+
+  const toggle = document.getElementById('menu-toggle');
+  const nav = document.getElementById('nav-links');
+
+  toggle.addEventListener('click', () => {
+    nav.classList.toggle('show');
+  });
+  document.addEventListener("DOMContentLoaded", () => {
+    const dropdownToggle = document.querySelector(".dropdown-toggle");
+    const dropdown = dropdownToggle.parentElement;
+
+    dropdownToggle.addEventListener("click", (e) => {
+      e.preventDefault();
+      dropdown.classList.toggle("open");
+
+      // Close other dropdowns (optional for multiple dropdowns)
+      document.querySelectorAll(".dropdown").forEach((el) => {
+        if (el !== dropdown) el.classList.remove("open");
+      });
+    });
+
+    // Optional: click outside to close
+    document.addEventListener("click", (e) => {
+      if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove("open");
+      }
+    });
+  });
+
+    const items = document.querySelectorAll('.gallery-item');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          const delay = (i % 6) * 120;
+          entry.target.style.transitionDelay = `${delay}ms`;
+          entry.target.classList.add('visible', 'animate__animated', 'animate__fadeInUp');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    items.forEach(item => observer.observe(item));
+  </script>
+  <script>
+document.querySelectorAll(".gallery-item").forEach(item => {
+  item.addEventListener("mouseenter", () => {
+    let tagline = item.getAttribute("data-tagline");
+    if(tagline){
+      window.speechSynthesis.cancel(); // stop previous speech
+      let speech = new SpeechSynthesisUtterance(tagline);
+      speech.lang = "ar-SA"; // Arabic accent
+      speech.rate = 0.9;     // thoda slow, natural recitation feel
+      window.speechSynthesis.speak(speech);
+    }
+  });
+});
+</script>
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AESTHORA – Image Generator</title>
+
+  <!-- AOS Animation CSS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: radial-gradient(circle at top right, #fe90db, #efefef);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.generator-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 80px 20px;
+}
+
+
+.generator-box {
+  background: #ffffffd9;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  max-width: 650px;
+  width: 100%;
+  text-align: center;
+}
+
+    h2 {
+      color: #7b1fa2;
+      font-size: 28px;
+      margin-bottom: 25px;
+    }
+
+    input {
+      padding: 14px;
+      font-size: 16px;
+      width: 100%;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      margin-bottom: 18px;
+    }
+
+    .animated-button {
+      background: linear-gradient(to right, #ec407a, #ab47bc);
+      color: white;
+      font-weight: bold;
+      padding: 14px;
+      width: 100%;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      animation: pulse 2s infinite;
+      transition: background 0.3s ease;
+    }
+
+    .animated-button:hover {
+      background: linear-gradient(to right, #d81b60, #8e24aa);
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255, 64, 129, 0.6); }
+      70% { box-shadow: 0 0 0 15px rgba(255, 64, 129, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 64, 129, 0); }
+    }
+
+    #output {
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding-bottom: 100px;
+    }
+
+    #output .image-box {
+      background: #ffffff;
+      border-radius: 14px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      padding: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    #output .image-box:hover {
+      transform: translateY(-5px);
+    }
+
+    #output img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+  
+    .download-btn {
+  background: linear-gradient(135deg, #ff5e8e, #dd076b);
+  color: white;
+  padding: 12px 20px;
+  border: 2px solid #ffb6d2;
+  border-radius: 8px;
+  font-weight: bold;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  box-shadow: 0 0 12px #ff69b4b2;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  margin-top: 15px;
+  animation: pulseGlow 2s infinite;
+}
+
+.download-btn:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #e01a8e, #ff6ca0);
+  box-shadow: 0 0 18px #ff69b4, 0 0 25px #e01a8e;
+}
+
+/* Optional glowing animation */
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 10px #ff69b4b2;
+  }
+  50% {
+    box-shadow: 0 0 18px #ff69b4, 0 0 28px #ff69b4;
+  }
+  100% {
+    box-shadow: 0 0 10px #ff69b4b2;
+  }
+}
+  </style>
+</head>
+<body>
+
+  <body>
+    <!-- Header Navbar -->
+   <header class="navbar glass-blur">
+  <div class="logo">
+    <img src="images/icon_ss-removebg-preview.png" alt="" width="30%"><span>Aesthora</span>
+  </div>
+  <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+  <nav>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+     <li class="dropdown">
+  <a href="#" class="dropdown-toggle" tabindex="0">Gallery ▾</a>
+  <ul class="dropdown-menu">
+    <li><a href="photography.html">Photography</a></li>
+    <li><a href="arts.html">Art</a></li>
+    <li><a href="calligraphy.html">Calligraphy</a></li>
+  </ul>
+</li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+  
+    <!-- Main Image Generator Section -->
+    <section class="generator-section">
+      <div class="generator-box" data-aos="zoom-in" data-aos-duration="1000">
+        <h2>🎨 AESTHORA Image Generator</h2>
+        <input type="text" id="prompt" placeholder="Search images like 'sunset', 'flower', 'galaxy'" />
+        <button onclick="searchImage()" class="animated-button">Generate Images</button>
+        <div id="output"></div>
+      </div>
+    </section>
+  
+   <!-- footer -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-box">
+      <h3>About Us</h3>
+      <p>
+        AESTHORA is a contemporary art space blending technology, emotion, and visual storytelling. 
+        Explore creativity through colors, code, and connection.
+      </p>
+    </div>
+
+    <div class="footer-box">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-box">
+      <h3>Contact Us</h3>
+      <p>+92 3123456789</p>
+      <p>contact@aesthora.com</p>
+      <p>Art District, Dream City</p>
+    </div>
+  </div>
+
+  <div class="footer-socials">
+  <a href="https://www.facebook.com/" target="_blank">
+    <img src="images/facebook.png" alt="Facebook" class="social-icon" />
+  </a>
+  <a href="https://www.instagram.com/" target="_blank">
+    <img src="images/instagram.png" alt="Instagram" class="social-icon" />
+  </a>
+  <a href="https://www.youtube.com/" target="_blank">
+    <img src="images/youtube.png" alt="YouTube" class="social-icon" />
+  </a>
+  <a href="https://www.pinterest.com/" target="_blank">
+    <img src="images/pinterest.png" alt="Pinterest" class="social-icon" />
+  </a>
+</div>
+
+
+  <div class="footer-bottom">
+    © 2025 AESTHORA Art Gallery. All Rights Reserved.
+  </div>
+</footer>
+<!-- footer end -->
+  </body>
+  
+  <!-- JS Script -->
+  <script>
+    async function searchImage() {
+      const prompt = document.getElementById("prompt").value.trim();
+      const outputDiv = document.getElementById("output");
+      outputDiv.innerHTML = "🔍 Generating Images...";
+
+      if (!prompt) {
+        outputDiv.innerHTML = "❗ Please enter a search term.";
+        return;
+      }
+
+      const apiKey = "51472806-6d5d86b6a05b50ae6a3379edb";
+
+      try {
+        const res = await fetch(`https://pixabay.com/api/?key=${apiKey}&q=${encodeURIComponent(prompt)}&image_type=photo&per_page=6`);
+        const data = await res.json();
+
+        if (data.hits && data.hits.length > 0) {
+          outputDiv.innerHTML = "";
+          data.hits.forEach((img, i) => {
+            const filename = `${prompt.replace(/\s+/g, "_")}_${i + 1}.jpg`;
+            outputDiv.innerHTML += `
+              <div class="image-box" data-aos="fade-up" data-aos-delay="${i * 100}">
+                <img src="${img.webformatURL}" alt="Generated image"/>
+                <button onclick="forceDownload('${img.webformatURL}', '${filename}')" class="download-btn">⬇️ Download</button>
+              </div>`;
+          });
+        } else {
+          outputDiv.innerHTML = `❌ No image found for "${prompt}". Try another keyword.`;
+        }
+      } catch (error) {
+        outputDiv.innerHTML = "❌ Error fetching image. Check internet/API key.";
+        console.error(error);
+      }
+    }
+
+    function forceDownload(url, filename) {
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  </script>
+  <script>
+    const toggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('nav-links');
+  
+    toggle.addEventListener('click', () => {
+      nav.classList.toggle('show');
+    });
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const dropdownToggle = document.querySelector(".dropdown-toggle");
+      const dropdown = dropdownToggle.parentElement;
+  
+      dropdownToggle.addEventListener("click", (e) => {
+        e.preventDefault();
+        dropdown.classList.toggle("open");
+  
+        // Close other dropdowns (optional for multiple dropdowns)
+        document.querySelectorAll(".dropdown").forEach((el) => {
+          if (el !== dropdown) el.classList.remove("open");
+        });
+      });
+  
+      // Optional: click outside to close
+      document.addEventListener("click", (e) => {
+        if (!dropdown.contains(e.target)) {
+          dropdown.classList.remove("open");
+        }
+      });
+    });
+  </script>
+
+  <!-- AOS Animation JS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+
+</body>
+</html>

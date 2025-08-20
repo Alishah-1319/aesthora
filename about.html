@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us - Art Gallery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+   :root {
+  --bg-color: #ffffff;
+  --text-color: #222;
+  --card-bg: #ffffff;
+  --overlay: rgba(0, 0, 0, 0.5);
+  --box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+}
+
+/* body.dark {
+  --bg-color: #121212;
+  --text-color: #ffffff;
+  --card-bg: #1e1e1e;
+  --overlay: rgba(0, 0, 0, 0.7);
+  --box-shadow: 0 0 15px 2px #ff0000, 
+                0 0 25px 4px #ff7f00, 
+                0 0 35px 6px #ffff00, 
+                0 0 45px 8px #00ff00, 
+                0 0 55px 10px #0000ff, 
+                0 0 65px 12px #4b0082, 
+                0 0 75px 14px #8f00ff;
+} */
+body {
+  background: radial-gradient(circle at top left, #fff0f5, #e0eaff);
+  color: var(--text-color);
+}
+
+.card, .cardS, .cardA, .cardG {
+  background: var(--card-bg);
+  color: var(--text-color);
+  box-shadow: var(--box-shadow);
+}
+
+
+
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+   
+
+    .dark-mode-toggle {
+  position: absolute;
+  /* bottom: 20px; */
+  /* top: 20px; */
+  margin-top: 90px;
+  right: 20px;
+  z-index: 1000;
+  background: #333;
+  color: #fff;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+}
+
+.dark-mode-toggle:hover {
+  background: #555;
+}
+
+body.dark h1,
+body.dark h2 {
+  color: #fff !important;
+}
+
+
+   /* :root {
+  --bg-color: #ffffff;
+  --text-color: #222;
+  --card-bg: #ffffff;
+  --overlay: rgba(0, 0, 0, 0.5);
+  --box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+}
+
+body.dark {
+  --bg-color: #121212;
+  --text-color: #ffffff;
+  --card-bg: #1e1e1e;
+  --overlay: rgba(0, 0, 0, 0.7);
+  --box-shadow: 0 0 15px 2px #ff0000, 
+                0 0 25px 4px #ff7f00, 
+                0 0 35px 6px #ffff00, 
+                0 0 45px 8px #00ff00, 
+                0 0 55px 10px #0000ff, 
+                0 0 65px 12px #4b0082, 
+                0 0 75px 14px #8f00ff;
+} */
+
+
+   /* Base layout */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  height: 105px;
+  top: 0;
+  z-index: 999;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  /* gap: 5px; spacing between image and text */
+}
+
+.logo img {
+  height: 80px; /* adjust this to make it not too tall or small */
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.logo span {
+  font-family:'Edwardian Script ITC', cursive;
+  font-size: 40px;  /* slightly smaller than before if needed */
+  font-weight: bold;
+  color: #1f0901;
+  line-height: 1;
+}
+
+/* Toggle button (mobile) */
+.menu-toggle {
+  display: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #111;
+}
+
+/* Navigation */
+nav {
+  flex-grow: 1;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  position: relative;
+}
+
+.nav-links a {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 20px;
+  text-decoration: none;
+  color: #111;
+  padding: 10px;
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #cd346f;
+  border: 2px solid #cd346f;
+  border-radius: 5px;
+}
+
+/* Dropdown */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  min-width: 160px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 1000;
+}
+
+/* When dropdown is active (added via JS) */
+.dropdown.open .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Links */
+.dropdown-menu li a {
+  display: block;
+  padding: 10px 16px;
+  color: #333;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #f2f2f2;
+  color: #b80668;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: flex-start;
+    position: absolute;
+    top: 65px;
+    right: 0;
+    background: white;
+    width: 100%;
+    display: none;
+    padding: 10px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .nav-links li {
+    width: 100%;
+  }
+
+  .nav-links a {
+    width: 100%;
+    padding: 12px 20px;
+  }
+
+  /* Fix dropdown on mobile */
+  .dropdown-menu {
+    position: relative;
+    top: 0;
+    left: 0;
+    box-shadow: none;
+    background: #f9f9f9;
+    border-radius: 0;
+    padding-left: 15px;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+  }
+
+  .dropdown.open .dropdown-menu {
+    opacity: 1;
+    max-height: 500px; /* enough to show all links */
+    margin-top: 0;
+  }
+
+  .dropdown-menu li a {
+    padding: 10px 16px;
+  }
+}
+
+.carousel {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  height: 500px;
+  margin: 0 auto 60px;
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+
+    @media (max-width: 768px) {
+      .carousel {
+        height: 260px;
+      }
+    } 
+
+.slides {
+  display: flex;
+  width: 100%;
+  animation: slide 20s infinite;
+}
+
+.slide {
+  flex: 1 0 100%;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@keyframes slide {
+  0% { transform: translateX(0%); }
+  20% { transform: translateX(0%); }
+  25% { transform: translateX(-100%); }
+  45% { transform: translateX(-100%); }
+  50% { transform: translateX(-200%); }
+  70% { transform: translateX(-200%); }
+  75% { transform: translateX(-300%); }
+  95% { transform: translateX(-300%); }
+  100% { transform: translateX(-400%); }
+}
+
+    header {
+      text-align: center;
+      padding: 60px 20px 30px;
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3em;
+      color: var(--primary-color);
+    }
+
+    header p {
+      font-size: 1.2em;
+      color: #666;
+    }
+
+    section {
+      padding: 50px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 3em;
+      color: var(--primary-color);
+      margin-bottom: 40px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      --text-color: #444;
+      font-family: 'Times New Roman', Times, serif;
+      background: var(--card-bg);
+      padding: 25px;
+      border-radius: 18px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 35px rgba(0,0,0,0.1);
+    }
+
+    .card img {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+      border: 3px solid var(--accent);
+    }
+
+    .card h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--primary-color);
+      margin: 10px 0 5px;
+    }
+
+    .card p {
+      color: #555;
+      font-size: 0.95em;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2.3em;
+      }
+    } 
+   /* servise css */
+   .sectionS {
+      padding: 60px 20px;
+      text-align: center;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .sectionS-title {
+      --primary-color: #8e6f60;
+      font-size: 3rem;
+      margin-bottom: 40px;
+      font-weight: bold;
+      color: #664b35;
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+    .cardsS {
+      --text-color: #865c39;
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .cardS {
+      --text-color: #865c39;
+      font-family: 'Times New Roman', Times, serif;
+      position: relative;
+      width: 300px;
+      height: 400px;
+      overflow: hidden; /* Keeps everything inside */
+      border-radius: 16px;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+      cursor: pointer;
+      transform: translateY(20px);
+      opacity: 0;
+      animation: fadeSlideIn 1s ease forwards;
+    }
+
+    .cardS:nth-child(1) { animation-delay: 0.2s; }
+    .cardS:nth-child(2) { animation-delay: 0.4s; }
+    .cardS:nth-child(3) { animation-delay: 0.6s; }
+
+    @keyframes fadeSlideIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .cardS:hover {
+      transform: scale(1.03);
+      transition: transform 0.4s ease;
+    }
+
+    .cardS img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .cardS:hover img {
+      transform: scale(1.08);
+    }
+
+    .cardS .contentS {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      padding: 25px 20px;
+      background: rgba(255, 255, 255, 0.95);
+      transform: translateY(100%);
+      opacity: 0;
+      transition: all 0.6s ease;
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+      overflow: hidden; /* Keeps inner animation inside */
+    }
+
+    .cardS:hover .contentS {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .contentS h3, .contentS p {
+      opacity: 0;
+      transform: translateY(30px); /* Changed from X to Y for cleaner vertical slide */
+      transition: all 0.6s ease;
+    }
+
+    .cardS:hover .contentS h3 {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.2s;
+    }
+
+    .cardS:hover .contentS p {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.4s;
+    }
+
+    .contentS h3 {
+      margin: 0 0 12px;
+      font-size: 1.6rem;
+      color: #222;
+    }
+
+    .contentS p {
+      margin: 0;
+      font-size: 1rem;
+      color: #444;
+      line-height: 1.5;
+    }
+    /* artists */
+    .sectionA-title {
+      text-align: center;
+      font-size: 3em;
+      font-family: 'Times New Roman', Times, serif;
+      margin: 30px 0;
+      color: #61482c;
+    }
+
+    .cardsA {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 40px;
+      padding: 20px;
+    }
+
+    .cardA {
+      --text-color: #444;
+      font-family: 'Times New Roman', Times, serif;
+      width: 250px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      text-align: center;
+    }
+
+    .cardA:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .cardA img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .cardA:hover img {
+      transform: scale(1.05);
+    }
+
+    .cardA h3, .card p {
+      padding: 0 15px;
+    }
+
+    .cardA h3 {
+      margin-top: 15px;
+      font-size: 1.2em;
+      color: #222;
+    }
+
+    .cardA p {
+      font-size: 0.95em;
+      color: #666;
+      margin-bottom: 15px;
+    }
+
+    /* Modal Styles */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      color: purple;
+      font-size: 20px;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      animation: fadeIn 0.3s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      width: 90%;
+      max-width: 500px;
+      text-align: center;
+      position: relative;
+      box-shadow: 10px 10px 10px 10px #f55286;
+      animation: slideIn 0.4s ease;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal-content img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    .modal-content h2 {
+      color: purple;
+      margin: 10px 0;
+      font-size: 1.5em;
+    }
+
+    .modal-content p {
+      color: #555;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 2px;
+      right: 20px;
+      font-size: 2.5em;
+      color: #686767;
+      cursor: pointer;
+    }
+    .close-btn:hover {
+      color: #ff0000;
+    }
+    /* gallery work */
+    body.dark {
+      --bg-light: #1f1f1f;
+      --card-bg: #2a2a2a;
+      --text-dark: #fff;
+    }
+
+    .dark-mode-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      background: #333;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    section {
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .sectionG-title {
+      color: var(--text-color);
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      text-align: center;
+      margin-bottom: 60px;
+      color: var(--text-dark);
+    }
+
+    .cardsG {
+     background-color: var(--card-bg);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+    }
+
+    .cardG {
+      position: relative;
+      background-color: var(--card-bg);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .cardG:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .cardG img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .cardG::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, var(--overlay), transparent);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .cardG:hover::after {
+      opacity: 1;
+    }
+
+    .cardG-content {
+      padding: 20px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.94);
+      transform: translateY(100%);
+      opacity: 0;
+      transition: all 0.5s ease;
+    }
+
+    .cardG:hover .cardG-content {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .cardG h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      margin: 0 0 10px 0;
+      color: #2c2c2c;
+    }
+
+    .cardG p {
+      font-size: 16px;
+      margin: 0;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .sectionG-title {
+        font-size: 32px;
+      }
+
+      .cardG h3 {
+        font-size: 20px;
+      }
+    }
+    .footer {
+  backdrop-filter: blur(15px);
+  background: rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ac114f;
+  padding: 50px 20px 30px;
+  font-family: 'Georgia', serif;
+  position: relative;
+  z-index: 1;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top left, rgba(255, 180, 203, 0.1), rgba(255, 255, 255, 0.05));
+  z-index: -1;
+  backdrop-filter: blur(15px);
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+  max-width: 1200px;
+  margin: auto;
+  padding-bottom: 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.footer-box h3 {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 15px;
+  padding: 10px;
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #000000;
+  letter-spacing: 1px;
+}
+
+.footer-box p,
+.footer-box ul li {
+  font-size: 15px;
+  margin: 6px 0;
+  color: #9e0940;
+}
+
+.footer-box ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-box ul li a {
+  color: #af0d41;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.footer-box ul li a:hover {
+  color: #ff9bb2;
+  text-decoration: underline;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-socials .social-icon {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  border-radius: 8px; /* or 50% for circular icons */
+  transition: transform 0.3s ease;
+}
+
+.footer-socials .social-icon:hover {
+  transform: scale(1.1);
+}
+
+
+.footer-bottom {
+  font-size: 14px;
+  color: #000000;
+  margin-top: 10px;
+  text-align: center;
+}
+
+  </style>
+
+</head>
+<body>
+<header class="navbar glass-blur">
+  <div class="logo">
+    <img src="images/icon_ss-removebg-preview.png" alt="" width="30%"><span>Aesthora</span>
+  </div>
+  <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+  <nav>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+     <li class="dropdown">
+  <a href="#" class="dropdown-toggle" tabindex="0">Gallery ▾</a>
+  <ul class="dropdown-menu">
+    <li><a href="photography.html">Photography</a></li>
+    <li><a href="arts.html">Art</a></li>
+    <li><a href="calligraphy.html">Calligraphy</a></li>
+  </ul>
+</li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+ <!-- Dark Mode Toggle -->
+   <!-- <button class="dark-mode-toggle" onclick="toggleDarkMode()">🌙 Toggle Mode</button> -->
+<!-- Carousel Section -->
+<section>
+  <h2 class="section-title" style="color: rgb(180, 19, 108);">Gallery Highlights</h2>
+  <div class="carousel">
+    <div class="slides" id="carouselSlides">
+      <div class="slide"><img src="images/art1.webp" alt="Artwork 1"></div>
+      <div class="slide"><img src="images/art2.jpg" alt="Artwork 2"></div>
+      <div class="slide"><img src="images/art10.webp" alt="Artwork 3"></div>
+      <div class="slide"><img src="images/art7.jpg" alt="Artwork 4"></div>
+      <div class="slide"><img src="images/art9.jpg" alt="Artwork 5"></div>
+
+    </div>
+  </div>
+</section>
+
+<body>
+  <!-- Header -->
+  <header>
+    <h1 style="color: rgb(180, 19, 108);">About Our Art Gallery</h1>
+    <p>Where beauty meets soul. We celebrate creativity in every brushstroke.</p>
+  </header>
+
+  <!-- Services Section -->
+<section class="sectionS">
+  <h2 class="sectionS-title" style="color: rgb(180, 19, 108);">What We Offer</h2>
+  <div class="cardsS">
+    <div class="cardS">
+      <img src="images/exhibition.jpg" alt="Exhibitions">
+      <div class="contentS">
+        <h3 style="color: rgb(255, 3, 87);">Exhibitions</h3>
+        <p>Seasonal art exhibits that <br> showcase both renowned and <br> rising talents.</p>
+      </div>
+    </div>
+    <div class="cardS">
+      <img src="images/workshop.jpg" alt="Workshops">
+      <div class="contentS">
+        <h3 style="color: rgb(255, 3, 87);">Workshops</h3>
+        <p>Creative workshops in painting,<br> sketching, and digital art <br> for all levels.</p>
+      </div>
+    </div>
+    <div class="cardS">
+      <img src="images/commission.jpg" alt="Commissions">
+      <div class="contentS">
+        <h3 style="color: rgb(255, 3, 87);">Commissions</h3>
+        <p>Custom artworks crafted by professionals to reflect your vision.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Artists Section -->
+<section class="artists">
+  <h2 class="sectionA-title" style="color: rgb(180, 19, 108);">Featured Artists</h2>
+  <div class="cardsA">
+    <div class="cardA" onclick="showModal('images/img27.jpg', 'Alisha', 'Watercolor expert who brings flora and emotion to life on paper.')">
+      <img src="images/img27.jpg" alt="Alisha">
+      <h2 style="color: purple;">Alisha</h2>
+      <p>Watercolor expert...</p>
+    </div>
+    <div class="cardA" onclick="showModal('images/profile2.jpeg', 'Aliza ', 'Abstract art visionary with a flair for dramatic color fields and textures.')">
+      <img src="images/profile2.jpeg" alt="Aliza">
+      <h2 style="color: purple;">Aliza </h2>
+      <p>Abstract art visionary...</p>
+    </div>
+    <div class="cardA" onclick="showModal('images/img26.jpg', 'Romaisa', 'Digital illustrator crafting modern portraits with elegance and mystery.')">
+      <img src="images/img26.jpg" alt="Romaisa">
+      <h2 style="color: purple;">Romaisa</h2>
+      <p>Digital illustrator...</p>
+    </div>
+  </div>
+</section>
+
+<!-- Modal -->
+<div class="modal" id="artistModal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <img id="modalImg" src="" alt="Artist Image">
+    <h3 id="modalName"></h3>
+    <p id="modalDesc"></p>
+  </div>
+</div>
+
+
+  <!-- Gallery Work -->
+  <section>
+    <h2 class="sectionG-title" style="color: rgb(180, 19, 108);" data-aos="fade-up" data-aos-duration="1500">Our Mission</h2>
+    <div class="cardsG">
+      <div class="cardG" data-aos="zoom-in" data-aos-duration="1500" onmouseenter="playHoverSound()">
+        <img src="images/communityEvents.jpg" alt="Community Events">
+        <div class="cardG-content">
+          <h3 style="color: rgb(255, 3, 87);">Community Events</h3>
+          <p>Bringing art to public spaces with live painting and interactive art walks.</p>
+        </div>
+      </div>
+
+      <div class="cardG" data-aos="zoom-in" data-aos-delay="300" data-aos-duration="1500" onmouseenter="playHoverSound()">
+        <img src="images/artistImpowerment.jpg" alt="Artist Empowerment">
+        <div class="cardG-content">
+          <h3 style="color: rgb(255, 3, 87);">Artist Empowerment</h3>
+          <p>Supporting new voices with mentorship, platforms, and visibility.</p>
+        </div>
+      </div>
+
+      <div class="cardG" data-aos="zoom-in" data-aos-delay="600" data-aos-duration="1500" onmouseenter="playHoverSound()">
+        <img src="images/galleryDesign.jpg" alt="Gallery Design">
+        <div class="cardG-content">
+          <h3 style="color: rgb(255, 3, 87);">Gallery Design</h3>
+          <p>We curate immersive spaces that soothe and inspire through art.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- footer -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-box">
+      <h3>About Us</h3>
+      <p>
+        AESTHORA is a contemporary art space blending technology, emotion, and visual storytelling. 
+        Explore creativity through colors, code, and connection.
+      </p>
+    </div>
+
+    <div class="footer-box">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-box">
+      <h3>Contact Us</h3>
+      <p>+92 3123456789</p>
+      <p>contact@aesthora.com</p>
+      <p>Art District, Dream City</p>
+    </div>
+  </div>
+
+  <div class="footer-socials">
+  <a href="https://www.facebook.com/" target="_blank">
+    <img src="images/facebook.png" alt="Facebook" class="social-icon" />
+  </a>
+  <a href="https://www.instagram.com/" target="_blank">
+    <img src="images/instagram.png" alt="Instagram" class="social-icon" />
+  </a>
+  <a href="https://www.youtube.com/" target="_blank">
+    <img src="images/youtube.png" alt="YouTube" class="social-icon" />
+  </a>
+  <a href="https://www.pinterest.com/" target="_blank">
+    <img src="images/pinterest.png" alt="Pinterest" class="social-icon" />
+  </a>
+</div>
+
+  <div class="footer-bottom">
+    © 2025 AESTHORA Art Gallery. All Rights Reserved.
+  </div>
+</footer>
+<!-- footer end -->
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  // navbar
+  const toggle = document.getElementById('menu-toggle');
+  const nav = document.getElementById('nav-links');
+
+  toggle.addEventListener('click', () => {
+    nav.classList.toggle('show');
+  });
+  document.addEventListener("DOMContentLoaded", () => {
+    const dropdownToggle = document.querySelector(".dropdown-toggle");
+    const dropdown = dropdownToggle.parentElement;
+
+    dropdownToggle.addEventListener("click", (e) => {
+      e.preventDefault();
+      dropdown.classList.toggle("open");
+
+      // Close other dropdowns (optional for multiple dropdowns)
+      document.querySelectorAll(".dropdown").forEach((el) => {
+        if (el !== dropdown) el.classList.remove("open");
+      });
+    });
+
+    // Optional: click outside to close
+    document.addEventListener("click", (e) => {
+      if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove("open");
+      }
+    });
+  });
+
+  // artists
+  function showModal(img, name, desc) {
+    document.getElementById('modalImg').src = img;
+    document.getElementById('modalName').innerText = name;
+    document.getElementById('modalDesc').innerText = desc;
+    document.getElementById('artistModal').style.display = 'flex';
+  }
+
+  function closeModal() {
+    document.getElementById('artistModal').style.display = 'none';
+  }
+
+  // Close modal when clicking outside content
+  window.onclick = function(e) {
+    const modal = document.getElementById('artistModal');
+    if (e.target === modal) closeModal();
+  };
+  // darkmode
+//   function toggleDarkMode() {
+//   document.body.classList.toggle('dark');
+// }
+
+
+</script>
+<script>
+  AOS.init();
+
+  function playHoverSound() {
+    const sound = document.getElementById('hover-sound');
+    sound.currentTime = 0;
+    sound.play();
+  }
+
+  function toggleDarkMode() {
+    document.body.classList.toggle('dark');
+  }
+</script>
+</body>
+</html>

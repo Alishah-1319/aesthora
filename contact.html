@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us – AESTHORA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: url('images/watercolor-world-art-day-background_23-2149327049.avif') no-repeat center center/cover;
+
+    }
+
+    .page-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 50px;   /* adjust based on navbar height */
+  padding-bottom: 50px; /* adjust based on footer height */
+  overflow: hidden;
+}
+
+
+    .contact-box {
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 2rem;
+      width: 90%;
+      max-width: 600px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      color: #222;
+      text-align: center;
+    }
+
+    .contact-box h2 {
+      font-size: 2.2rem;
+      color: #111;
+      font-weight: bold;
+      font-family: Pacifico;
+    }
+
+    .contact-box h3 {
+      margin: 0.5rem 0;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.5rem;
+      color: #444;
+    }
+
+    .contact-box p {
+      margin-bottom: 1.5rem;
+      color: #361919;
+      font-family: Pacifico;
+    }
+
+    .contact-box input,
+    .contact-box textarea {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      margin-bottom: 1rem;
+      border: none;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.6);
+      color: #111;
+      font-size: 1rem;
+    }
+
+    .contact-box textarea {
+      resize: none;
+    }
+
+    .contact-box input::placeholder,
+    .contact-box textarea::placeholder {
+      color: #555;
+    }
+
+    .contact-box button {
+      background: linear-gradient(135deg, #ff6584, #6c63ff);
+      color: #fff;
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 40px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      font-family: 'Dancing Script', cursive;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .contact-box button:hover {
+      background: linear-gradient(135deg, #ff3366, #4e4eff);
+      box-shadow: 0 0 20px rgba(108, 99, 255, 0.4);
+    }
+
+    /* Floating Button */
+    .map-float-btn {
+      position: fixed;
+      bottom: 90px;
+      right: 30px;
+      background: #ff6584;
+      color: white;
+      padding: 0.8rem 1.2rem;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-family: 'Dancing Script', cursive;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      z-index: 999;
+      transition: background 0.3s ease;
+    }
+
+    .map-float-btn:hover {
+      background: #e9416c;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      backdrop-filter: blur(5px);
+      background-color: rgba(0,0,0,0.4);
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9);}
+      to { opacity: 1; transform: scale(1);}
+    }
+
+    .modal-content {
+      background: #fff;
+      border-radius: 16px;
+      padding: 1rem;
+      width: 90%;
+      max-width: 800px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+      position: relative;
+    }
+
+    .modal iframe {
+      width: 100%;
+      height: 400px;
+      border: none;
+      border-radius: 12px;
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 16px;
+      font-size: 24px;
+      color: #ff3366;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+      .contact-box {
+        padding: 1.5rem;
+      }
+
+      .contact-box h2 {
+        font-size: 1.8rem;
+      }
+
+      .modal iframe {
+        height: 250px;
+      }
+
+      .map-float-btn {
+        right: 20px;
+        bottom: 80px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+ <header class="navbar glass-blur">
+  <div class="logo">
+    <img src="images/icon_ss-removebg-preview.png" alt="" width="30%"><span>Aesthora</span>
+  </div>
+  <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+  <nav>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+     <li class="dropdown">
+  <a href="#" class="dropdown-toggle" tabindex="0">Gallery ▾</a>
+  <ul class="dropdown-menu">
+    <li><a href="photography.html">Photography</a></li>
+    <li><a href="arts.html">Art</a></li>
+    <li><a href="calligraphy.html">Calligraphy</a></li>
+  </ul>
+</li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+  <!-- Floating Map Button -->
+  <div class="map-float-btn" onclick="openMap()">📍 View Map</div>
+
+  <!-- Main Content -->
+  <div class="page-wrapper">
+    <div class="contact-box">
+      <h2>Get in Touch with AESTHORA</h2>
+      <p>We’d love to hear from you — whether you’re an artist, a curator, or just passionate about art.</p>
+      <form id="contactForm" onsubmit="return validateForm()">
+        <input type="text" id="name" name="name" placeholder="Your Name" required>
+        <input type="email" id="email" name="email" placeholder="Your Email" required>
+        <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal Map -->
+  <div class="modal" id="mapModal">
+    <div class="modal-content">
+      <span class="close" onclick="closeMap()">&times;</span>
+      <iframe 
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3620.719255861334!2d67.03040347440415!3d24.845713877934936!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33dbb9efeb4ff%3A0x51cde1c4215a0cfa!2sFrere%20Hall%2C%20Karachi!5e0!3m2!1sen!2s!4v1692022074385!5m2!1sen!2s"
+  allowfullscreen=""
+  loading="lazy"
+  referrerpolicy="no-referrer-when-downgrade">
+</iframe>
+
+    </div>
+  </div>
+
+ <!-- footer -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-box">
+      <h3>About Us</h3>
+      <p>
+        AESTHORA is a contemporary art space blending technology, emotion, and visual storytelling. 
+        Explore creativity through colors, code, and connection.
+      </p>
+    </div>
+
+    <div class="footer-box">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-box">
+      <h3>Contact Us</h3>
+      <p>+92 3123456789</p>
+      <p>contact@aesthora.com</p>
+      <p>Art District, Dream City</p>
+    </div>
+  </div>
+
+  <div class="footer-socials">
+  <a href="https://www.facebook.com/" target="_blank">
+    <img src="images/facebook.png" alt="Facebook" class="social-icon" />
+  </a>
+  <a href="https://www.instagram.com/" target="_blank">
+    <img src="images/instagram.png" alt="Instagram" class="social-icon" />
+  </a>
+  <a href="https://www.youtube.com/" target="_blank">
+    <img src="images/youtube.png" alt="YouTube" class="social-icon" />
+  </a>
+  <a href="https://www.pinterest.com/" target="_blank">
+    <img src="images/pinterest.png" alt="Pinterest" class="social-icon" />
+  </a>
+</div>
+
+
+  <div class="footer-bottom">
+    © 2025 AESTHORA Art Gallery. All Rights Reserved.
+  </div>
+</footer>
+<!-- footer end -->
+
+  <!-- Scripts -->
+  <script>
+    function validateForm() {
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const message = document.getElementById("message").value.trim();
+      const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+      if (!name || !email || !message) {
+        alert("Please fill out all fields.");
+        return false;
+      }
+
+      if (!emailPattern.test(email)) {
+        alert("Please enter a valid email address.");
+        return false;
+      }
+
+      alert("🎉 Thank you! Your message has been sent.");
+      return true;
+    }
+
+    function openMap() {
+      document.getElementById("mapModal").style.display = "flex";
+    }
+
+    function closeMap() {
+      document.getElementById("mapModal").style.display = "none";
+    }
+  </script>
+  <script>
+    const toggle = document.getElementById('menu-toggle');
+  const nav = document.getElementById('nav-links');
+
+  toggle.addEventListener('click', () => {
+    nav.classList.toggle('show');
+  });
+  </script>
+    
+</script>
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const dropdownToggle = document.querySelector(".dropdown-toggle");
+    const dropdown = dropdownToggle.parentElement;
+
+    dropdownToggle.addEventListener("click", (e) => {
+      e.preventDefault();
+      dropdown.classList.toggle("open");
+
+      // Close other dropdowns (optional for multiple dropdowns)
+      document.querySelectorAll(".dropdown").forEach((el) => {
+        if (el !== dropdown) el.classList.remove("open");
+      });
+    });
+
+    // Optional: click outside to close
+    document.addEventListener("click", (e) => {
+      if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove("open");
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

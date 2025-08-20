@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puzzle-Game</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+#puzzleWrapper {
+     /* margin-top: 90px; */
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+  padding-top: 50px;
+  padding: 30px;
+  background: radial-gradient(circle, rgba(255,101,132,0.3), transparent 70%);
+  border-radius: 16px;
+  max-width: 460px;
+  margin: auto;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+#puzzleGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-gap: 6px;
+  justify-content: center;
+  margin: 20px auto;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  border: 2px solid #007BFF;
+}
+
+.puzzle-tile {
+  width: 100px;
+  height: 100px;
+  background-size: 300px 300px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.15);
+}
+
+.puzzle-tile:hover {
+  transform: scale(1.04);
+  outline: 2px solid #007BFF;
+}
+
+#statusMessage {
+  font-size: 20px;
+  margin-top: 10px;
+  color: #28a745;
+}
+
+.btn-group button {
+  margin: 10px 5px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  background-color: #007BFF;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btn-group button:hover {
+  background-color: #0056b3;
+}
+
+#stats {
+  display: flex;
+  justify-content: space-around;
+  font-size: 16px;
+  margin-top: 10px;
+  color: #444;
+}
+#artTitle{
+    color: palevioletred;
+}
+
+</style>
+</head>
+<body>
+ <header class="navbar glass-blur">
+  <div class="logo">
+    <img src="images/icon_ss-removebg-preview.png" alt="" width="30%"><span>Aesthora</span>
+  </div>
+  <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+  <nav>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+     <li class="dropdown">
+  <a href="#" class="dropdown-toggle" tabindex="0">Gallery ▾</a>
+  <ul class="dropdown-menu">
+    <li><a href="photography.html">Photography</a></li>
+    <li><a href="art.html">Art</a></li>
+    <li><a href="calligraphy.html">Calligraphy</a></li>
+  </ul>
+</li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+   <div id="puzzleWrapper">
+  <h2 id="artTitle">🖼 Art Puzzle: Tranquil Forest</h2>
+  <div id="stats">
+    <span>⏱ Time: <span id="timer">0</span>s</span>
+    <span>🔢 Moves: <span id="moves">0</span></span>
+  </div>
+
+  <div id="puzzleGrid"></div>
+
+  <div class="btn-group">
+    <button id="changeImageBtn">🔁 Switch Image</button>
+    <button id="musicToggle">🎵 Ambient: Off</button>
+  </div>
+
+  <div id="statusMessage"></div>
+
+  <!-- Sounds -->
+  <audio id="clickSound" src="sounds/computer-mouse-click-351398.mp3"></audio>
+  <audio id="successSound" src="sounds/success-340660.mp3"></audio>
+  <audio id="bgMusic" src="sounds/game-music-loop-7-145285.mp3" loop></audio>
+</div>
+
+<!-- footer -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-box">
+      <h3>About Us</h3>
+      <p>
+        AESTHORA is a contemporary art space blending technology, emotion, and visual storytelling. 
+        Explore creativity through colors, code, and connection.
+      </p>
+    </div>
+
+    <div class="footer-box">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-box">
+      <h3>Contact Us</h3>
+      <p>+92 3123456789</p>
+      <p>contact@aesthora.com</p>
+      <p>Art District, Dream City</p>
+    </div>
+  </div>
+
+  <div class="footer-socials">
+  <a href="https://www.facebook.com/" target="_blank">
+    <img src="images/facebook.png" alt="Facebook" class="social-icon" />
+  </a>
+  <a href="https://www.instagram.com/" target="_blank">
+    <img src="images/instagram.png" alt="Instagram" class="social-icon" />
+  </a>
+  <a href="https://www.youtube.com/" target="_blank">
+    <img src="images/youtube.png" alt="YouTube" class="social-icon" />
+  </a>
+  <a href="https://www.pinterest.com/" target="_blank">
+    <img src="images/pinterest.png" alt="Pinterest" class="social-icon" />
+  </a>
+</div>
+
+
+  <div class="footer-bottom">
+    © 2025 AESTHORA Art Gallery. All Rights Reserved.
+  </div>
+</footer>
+<!-- footer end -->
+
+<script>
+const gridSize = 3;
+const images = [
+  { src: 'images/cr2.jpg', title: 'Panda' },
+  { src: 'images/cr3.webp', title: 'Art' },
+  { src: 'images/cr4.webp', title: 'Nature' },
+  { src: 'images/flove.jpg', title: 'Dream' }
+];
+let imageIndex = 0, selectedTile = null, moves = 0, timer = 0, timerInterval;
+
+const clickSound = document.getElementById('clickSound');
+const successSound = document.getElementById('successSound');
+const bgMusic = document.getElementById('bgMusic');
+
+function startTimer() {
+  clearInterval(timerInterval);
+  timer = 0;
+  document.getElementById('timer').textContent = timer;
+  timerInterval = setInterval(() => {
+    timer++;
+    document.getElementById('timer').textContent = timer;
+  }, 1000);
+}
+
+function createPuzzle() {
+  const imageURL = images[imageIndex].src;
+  const title = images[imageIndex].title;
+  document.getElementById('artTitle').textContent = `🖼 Art Puzzle: ${title}`;
+  const puzzleGrid = document.getElementById('puzzleGrid');
+  puzzleGrid.innerHTML = '';
+  let tiles = [];
+
+  for (let row = 0; row < gridSize; row++) {
+    for (let col = 0; col < gridSize; col++) {
+      const tile = document.createElement('div');
+      tile.classList.add('puzzle-tile');
+      tile.style.backgroundImage = `url('${imageURL}')`;
+      tile.style.backgroundPosition = `-${col * 100}px -${row * 100}px`;
+      tile.dataset.correct = `${row}-${col}`;
+      tile.dataset.index = tiles.length;
+      tile.addEventListener('click', handleTileClick);
+      tiles.push(tile);
+    }
+  }
+
+  shuffleArray(tiles);
+
+  tiles.forEach(tile => puzzleGrid.appendChild(tile));
+
+  // Reset
+  moves = 0;
+  document.getElementById('moves').textContent = moves;
+  document.getElementById('statusMessage').textContent = '';
+  startTimer();
+}
+
+function handleTileClick(e) {
+  clickSound.play();
+  const clickedTile = e.target;
+  if (!selectedTile) {
+    selectedTile = clickedTile;
+    clickedTile.style.outline = '3px solid deeppink';
+  } else {
+    swapTiles(selectedTile, clickedTile);
+    selectedTile.style.outline = 'none';
+    selectedTile = null;
+    moves++;
+    document.getElementById('moves').textContent = moves;
+  }
+}
+
+function swapTiles(tile1, tile2) {
+  const tempPos = tile1.style.backgroundPosition;
+  tile1.style.backgroundPosition = tile2.style.backgroundPosition;
+  tile2.style.backgroundPosition = tempPos;
+
+  const tempCorrect = tile1.dataset.correct;
+  tile1.dataset.correct = tile2.dataset.correct;
+  tile2.dataset.correct = tempCorrect;
+
+  checkSolution();
+}
+
+function checkSolution() {
+  let solved = true;
+  document.querySelectorAll('.puzzle-tile').forEach((tile, index) => {
+    const correctRow = Math.floor(index / gridSize);
+    const correctCol = index % gridSize;
+    const expected = `${correctRow}-${correctCol}`;
+    if (tile.dataset.correct !== expected) {
+      solved = false;
+    }
+  });
+
+  if (solved) {
+    successSound.play();
+    document.getElementById('statusMessage').textContent = '🎉 Puzzle Solved!';
+    clearInterval(timerInterval);
+    setTimeout(() => {
+      alert(`✅ Puzzle Solved in ${timer}s and ${moves} moves!`);
+    }, 200);
+  }
+}
+
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+document.getElementById('changeImageBtn').addEventListener('click', () => {
+  imageIndex = (imageIndex + 1) % images.length;
+  createPuzzle();
+});
+
+document.getElementById('musicToggle').addEventListener('click', () => {
+  if (bgMusic.paused) {
+    bgMusic.play();
+    document.getElementById('musicToggle').textContent = '🎵 Ambient: On';
+  } else {
+    bgMusic.pause();
+    document.getElementById('musicToggle').textContent = '🎵 Ambient: Off';
+  }
+});
+
+createPuzzle();
+
+</script>
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const nav = document.getElementById('nav-links');
+
+  toggle.addEventListener('click', () => {
+    nav.classList.toggle('show');
+  });
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const dropdownToggle = document.querySelector(".dropdown-toggle");
+    const dropdown = dropdownToggle.parentElement;
+
+    dropdownToggle.addEventListener("click", (e) => {
+      e.preventDefault();
+      dropdown.classList.toggle("open");
+
+      // Close other dropdowns (optional for multiple dropdowns)
+      document.querySelectorAll(".dropdown").forEach((el) => {
+        if (el !== dropdown) el.classList.remove("open");
+      });
+    });
+
+    // Optional: click outside to close
+    document.addEventListener("click", (e) => {
+      if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove("open");
+      }
+    });
+  });
+</script>
+</body>
+</html>

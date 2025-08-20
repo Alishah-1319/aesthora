@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AESTHORA – Immersive Art Gallery</title>
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playwrite+AU+QLD:wght@100..400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Enhanced Button Styling */
+    .hero-btn, .cta-btn {
+      background: rgba(255, 105, 180, 0.2);
+      border: 2px solid hotpink;
+      color: #fff;
+      padding: 12px 30px;
+      border-radius: 30px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      backdrop-filter: blur(10px);
+    }
+    .hero-btn:hover, .cta-btn:hover {
+      background: hotpink;
+      color: white;
+      transform: scale(1.05);
+      box-shadow: 0 0 15px hotpink;
+    }
+    .filter-select {
+      padding: 10px 20px;
+      border: 2px solid pink;
+      border-radius: 20px;
+      margin: 20px auto;
+      display: block;
+      font-size: 16px;
+      background-color: rgba(255, 255, 255, 0.2);
+      color: #000;
+    }
+    .whisper {
+      position: absolute;
+      bottom: 5px;
+      left: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      font-size: 14px;
+      padding: 6px;
+      border-radius: 10px;
+      text-align: center;
+      opacity: 0;
+      transition: 0.3s ease;
+    }
+    .gallery-card:hover .whisper {
+      opacity: 1;
+    }
+    .emotion-filter {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .emotion-filter select {
+      padding: 10px 20px;
+      border: 2px solid pink;
+      border-radius: 20px;
+      margin: 20px auto;
+      display: block;
+      font-size: 16px;
+      background-color: rgba(255, 255, 255, 0.2);
+      color: #000;
+    }
+    .gallery-overlay p {
+      margin-top: 4px;
+      font-size: 0.9rem;
+      font-style: italic;
+      opacity: 0.7;
+    }
+    .gallery-btn,
+    .cta-btn,
+    .hero-btn {
+      background: rgba(255, 255, 255, 0.15);
+      color: #880a54;
+      border: 1px solid rgba(255,255,255,0.3);
+      padding: 0.8rem 1.5rem;
+      border-radius: 12px;
+      transition: 0.3s;
+      backdrop-filter: blur(6px);
+    }
+    .gallery-btn:hover,
+    .cta-btn:hover,
+    .hero-btn:hover {
+      background: #ff7eb9;
+      color: white;
+      box-shadow: 0 0 15px rgba(255, 126, 185, 0.4);
+    }
+    .voice-toggle-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(6px);
+  color: #ff66cc;
+  border: 1px solid #ff66cc;
+  padding: 10px 15px;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 9999;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.voice-toggle-btn:hover {
+  background: #ff66cc;
+  color: white;
+}
+.generate-btn {
+  display: inline-block;
+  background: linear-gradient(to right, #ffb6c1, #ff69b4);
+  color: white;
+  padding: 14px 30px;
+  border-radius: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: 0.3s ease;
+  box-shadow: 0 0 15px rgba(255, 105, 180, 0.4);
+  font-size: 18px;
+}
+
+.generate-btn:hover {
+  background: hotpink;
+  box-shadow: 0 0 25px hotpink;
+  transform: scale(1.05);
+}
+.anch{
+  text-decoration: none;
+    color: #fff;
+}
+
+
+  </style>
+</head>
+<body>
+
+<header class="navbar glass-blur">
+  <div class="logo">
+    <img src="images/icon_ss-removebg-preview.png" alt="" width="30%"><span>Aesthora</span>
+  </div>
+  <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+  <nav>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+     <li class="dropdown">
+  <a href="#" class="dropdown-toggle" tabindex="0">Gallery ▾</a>
+  <ul class="dropdown-menu">
+    <li><a href="photography.html">Photography</a></li>
+    <li><a href="arts.html">Art</a></li>
+    <li><a href="calligraphy.html">Calligraphy</a></li>
+  </ul>
+</li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+
+<section class="hero updated-hero">
+    <div class="overlay-gradient"></div>
+    <div class="hero-text">
+     <h1 class="slide-in-title"><span>AESTHORA</span> – The Art Within</h1>
+      <p>Immerse yourself in captivating works curated for the soul.<br>Explore brilliance in brushstrokes, stories in colors.</p>
+      <button class="hero-btn"><a href="gallery.html" class="anch">Explore Gallery</a></button>
+    </div>
+</section> 
+<section class="image-generate-section" data-aos="fade-up">
+  <div style="text-align: center; margin: 40px 0;">
+    <a href="imageGen.html" class="generate-btn">✨ Generate Your Own Image</a>
+  </div>
+</section>
+
+
+<section class="gallery-section" data-aos="fade-up">
+  <h2 class="section-title">Featured Masterpieces</h2>
+  <!-- <select class="filter-select" onchange="filterByEmotion(this.value)">
+    <option value="all">🎨 Filter by Emotion</option>
+    <option value="joy">Joy</option>
+    <option value="mystery">Mystery</option>
+    <option value="calm">Calm</option> -->
+  </select>
+  <div class="card-grid">
+    <div class="glass-card tilt gallery-card" data-aos="zoom-in" data-emotion="joy">
+      <img src="images/heart.webp" alt="Artwork 1" />
+      <div class="gallery-overlay">
+        <h3>Abstract Pulse</h3> <br>
+        <div class="whisper">The rhythm of hearts echoes in silence.</div>
+      </div>
+    </div>
+
+    <div class="glass-card tilt gallery-card" data-aos="zoom-in" data-aos-delay="100" data-emotion="mystery">
+      <img src="images/color.jpeg" alt="Artwork 2" />
+      <div class="gallery-overlay">
+        <h3>Color Symphony</h3> <br>
+        <div class="whisper">Colors sing what words cannot.</div>
+      </div>
+    </div>
+
+    <div class="glass-card tilt gallery-card" data-aos="zoom-in" data-aos-delay="200" data-emotion="calm">
+      <img src="images/dream.avif" alt="Artwork 3" />
+      <div class="gallery-overlay">
+        <h3>Dreamscape</h3> <br>
+        <div class="whisper">A peaceful drift into fantasy realms.</div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="emotion-filter">
+  <select id="emotionSelect" onchange="filterArtworks()">
+    <option value="all">🎨 Filter by Emotion</option>
+    <option value="calm">Calm</option>
+    <option value="passion">Passion</option>
+    <option value="dream">Dream</option>
+    <option value="nature">Nature</option>
+    <option value="mystery">Mystery</option>
+  </select>
+</div>
+
+<section class="animated-gallery" id="gallery">
+  <h2 class="section-title">✨ Artistic Flow</h2>
+  <p class="gallery-subtext">Every artwork has a rhythm, a voice — feel it as it appears before you.</p>
+
+  <div class="animated-grid" id="artworkGrid">
+    <!-- <img src="images/ainmal.jpg" alt="Art 1" data-aos="zoom-in-up">
+    <img src="images/art.jpg" alt="Art 2" data-aos="zoom-in-up" data-aos-delay="100">
+    <img src="images/dream2.jpg" alt="Art 3" data-aos="zoom-in-up" data-aos-delay="200">
+    <img src="images/humanart.jpg" alt="Art 4" data-aos="zoom-in-up" data-aos-delay="300">
+    <img src="images/nature2.jpg" alt="Art 5" data-aos="zoom-in-up" data-aos-delay="400">
+    <img src="images/animaesthecic.webp" alt="Art 6" data-aos="zoom-in-up" data-aos-delay="500">
+    <img src="images/nature1.jpg" alt="Art 7" data-aos="zoom-in-up" data-aos-delay="600">
+    <img src="images/animalart.jpg" alt="Art 8" data-aos="zoom-in-up" data-aos-delay="700">
+    <img src="images/flove.jpg" alt="Art 9" data-aos="zoom-in-up" data-aos-delay="800">
+    <img src="images/eye.jfif" alt="Art 10" data-aos="zoom-in-up" data-aos-delay="900"> -->
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox">
+  <span class="close" onclick="closeLightbox()">&times;</span>
+  <img class="lightbox-img" id="lightbox-img" src="" alt="Zoomed Art">
+  <audio id="lightbox-audio" loop>
+    <source src="audio/soft.mp3" type="audio/mpeg">
+  </audio>
+  <button id="voiceToggleBtn" class="voice-toggle-btn">🔊 Voice: On</button>
+</div>
+
+<section class="cta-aesthetic" data-aos="zoom-in">
+  <div class="cta-content">
+    <h2>🎨 Join the AESTHORA Circle</h2>
+    <p>Stay inspired — receive curated art, stories, and exclusive exhibition invites in your inbox.</p>
+    <button class="cta-btn" onclick="alert('🎉 Thank you for subscribing to AESTHORA! You’ll now receive exclusive art content.')">Subscribe Now</button>
+  </div>
+</section>
+
+<!-- footer -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-box">
+      <h3>About Us</h3>
+      <p>
+        AESTHORA is a contemporary art space blending technology, emotion, and visual storytelling. 
+        Explore creativity through colors, code, and connection.
+      </p>
+    </div>
+
+    <div class="footer-box">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-box">
+      <h3>Contact Us</h3>
+      <p>+92 3123456789</p>
+      <p>contact@aesthora.com</p>
+      <p>Art District, Dream City</p>
+    </div>
+  </div>
+
+  <div class="footer-socials">
+  <a href="https://www.facebook.com/" target="_blank">
+    <img src="images/facebook.png" alt="Facebook" class="social-icon" />
+  </a>
+  <a href="https://www.instagram.com/" target="_blank">
+    <img src="images/instagram.png" alt="Instagram" class="social-icon" />
+  </a>
+  <a href="https://www.youtube.com/" target="_blank">
+    <img src="images/youtube.png" alt="YouTube" class="social-icon" />
+  </a>
+  <a href="https://www.pinterest.com/" target="_blank">
+    <img src="images/pinterest.png" alt="Pinterest" class="social-icon" />
+  </a>
+</div>
+
+
+  <div class="footer-bottom">
+    © 2025 AESTHORA Art Gallery. All Rights Reserved.
+  </div>
+</footer>
+<!-- footer end -->
+
+
+
+
+<!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 1000, once: true });
+</script>
+
+<script>
+  const artworks = [
+    {src: 'images/ainmal.jpg', title: 'Wild Gaze', emotion: 'nature'},
+    {src: 'images/art.jpg', title: 'Ethereal Bloom', emotion: 'dream'},
+    {src: 'images/dream2.jpg', title: 'Dream Weave', emotion: 'dream'},
+    {src: 'images/humanart.jpg', title: 'Soul Sketch', emotion: 'passion'},
+    {src: 'images/nature2.jpg', title: 'Serenity Field', emotion: 'calm'},
+    {src: 'images/animaesthecic.webp', title: 'Instinct Abstract', emotion: 'mystery'},
+    {src: 'images/nature1.jpg', title: 'Silent River', emotion: 'calm'},
+    {src: 'images/animalart.jpg', title: 'Untamed Heart', emotion: 'passion'},
+    {src: 'images/flove.jpg', title: 'Floral Love', emotion: 'passion'},
+    {src: 'images/eye.jfif', title: 'Visionary', emotion: 'mystery'}
+  ];
+
+  const whispers = [
+  "This stillness holds a roaring storm.",
+  "A bloom that breathes in colors the heart remembers.",
+  "Dreams tangle in threads of forgotten skies.",
+  "A soul untamed stares through the silence.",
+  "The river speaks only to those who listen.",
+  "Where nature blooms and power roars",
+  "Even the wind kneels before this peace.",
+  "In every fur, a forest speaks",
+  "Every petal opens with a secret it never tells.",
+  "The eye reflects what words abandon."
+];
+
+
+  const artworkGrid = document.getElementById('artworkGrid');
+
+ function speak(text) {
+  const synth = window.speechSynthesis;
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = 'en-US';
+  synth.cancel();
+  synth.speak(utterance);
+}
+let voiceEnabled = true; // Default: voice is on
+
+document.getElementById('voiceToggleBtn').addEventListener('click', function () {
+  voiceEnabled = !voiceEnabled;
+  this.textContent = voiceEnabled ? "🔊 Voice: On" : "🔇 Voice: Off";
+});
+
+// Speak function
+function speak(text) {
+  const synth = window.speechSynthesis;
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = 'en-US';
+  if (selectedVoice) {
+    utterance.voice = selectedVoice;
+  }
+  synth.cancel();
+  synth.speak(utterance);
+}
+
+// Select a soft female voice
+function setFemaleVoice() {
+  const voices = window.speechSynthesis.getVoices();
+  const preferredVoices = ['Google UK English Female', 'Samantha', 'Microsoft Zira', 'Karen'];
+
+  selectedVoice = voices.find(v => 
+    preferredVoices.some(name => v.name.includes(name))
+  ) || voices[0]; // fallback to first voice
+}
+
+// Add click event to images
+function bindWhispers() {
+  document.querySelectorAll('.animated-card').forEach((card, index) => {
+    card.addEventListener('click', () => {
+      speak(whispers[index % whispers.length]);
+    });
+  });
+}
+
+// Wait for voices to load
+if ('speechSynthesis' in window) {
+  window.speechSynthesis.onvoiceschanged = () => {
+    setFemaleVoice();
+    bindWhispers();
+  };
+}
+
+
+  function attachWhispers() {
+    document.querySelectorAll('.animated-card').forEach((card, index) => {
+      const whisper = whispers[index % whispers.length];
+      card.removeEventListener('click', card._whisperHandler);
+      const handler = () => speak(whisper);
+      card._whisperHandler = handler;
+      card.addEventListener('click', handler);
+    });
+  }
+
+  function displayArtworks(filtered = 'all') {
+  artworkGrid.innerHTML = '';
+  const filteredArt = filtered === 'all' ? artworks : artworks.filter(a => a.emotion === filtered);
+
+  filteredArt.forEach((art, i) => {
+    const div = document.createElement('div');
+    div.className = 'gallery-card tilt glass-card';
+    div.setAttribute('data-aos', 'zoom-in-up');
+    div.setAttribute('data-aos-delay', i * 100);
+    div.innerHTML = `
+      <img src="${art.src}" alt="${art.title}" onclick="openLightbox('${art.src}'); speak('${whispers[i]}')">
+      <div class="gallery-overlay">
+        <h3>${art.title}</h3>
+      </div>
+    `;
+    artworkGrid.appendChild(div);
+  });
+
+    attachWhispers(); // 👈 attach AI whisper lines to each card
+  }
+
+  function filterArtworks() {
+    const selected = document.getElementById('emotionSelect').value;
+    displayArtworks(selected);
+  }
+
+  function openLightbox(src) {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    lightboxImg.src = src;
+    lightbox.style.display = 'flex';
+    document.getElementById('lightbox-audio').play();
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+    document.getElementById('lightbox-audio').pause();
+  }
+
+  function toggleAudio() {
+    const audio = document.getElementById('lightbox-audio');
+    if (audio.paused) audio.play();
+    else audio.pause();
+  }
+
+  document.addEventListener('DOMContentLoaded', () => displayArtworks());
+</script>
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const nav = document.getElementById('nav-links');
+
+  toggle.addEventListener('click', () => {
+    nav.classList.toggle('show');
+  });
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const dropdownToggle = document.querySelector(".dropdown-toggle");
+    const dropdown = dropdownToggle.parentElement;
+
+    dropdownToggle.addEventListener("click", (e) => {
+      e.preventDefault();
+      dropdown.classList.toggle("open");
+
+      // Close other dropdowns (optional for multiple dropdowns)
+      document.querySelectorAll(".dropdown").forEach((el) => {
+        if (el !== dropdown) el.classList.remove("open");
+      });
+    });
+
+    // Optional: click outside to close
+    document.addEventListener("click", (e) => {
+      if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove("open");
+      }
+    });
+  });
+</script>
+
+  <a href="puzzle.html" class="floating-btn" title="Play Puzzle Game">🧩</a>
+</body>
+</html>
+
