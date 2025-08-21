@@ -64,7 +64,7 @@ body {
   transform: translateY(-50%);
   width: 400px;
   text-align: left;
-  color: darkgreen;
+  color: rgb(162, 12, 75);
   display: none;
 }
 
@@ -88,6 +88,7 @@ body {
 }
 
 .content .des {
+  /* margin-right: 100px; */
   margin-top: 10px;
   margin-bottom: 20px;
   font-size: 18px;
@@ -97,6 +98,11 @@ body {
   font-weight: bold;
   opacity: 0;
   animation: animate 1s ease-in-out 0.9s 1 forwards;
+}
+@media (max-width: 768px) {
+  .content .des {
+    margin-right: 100px;
+  }
 }
 
 .content .btn {
@@ -169,7 +175,7 @@ body {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: #14ff72cb;
+  background-color: #f60298cb;
   color: #fff;
   border: none;
   font-size: 16px;
@@ -180,7 +186,7 @@ body {
 }
 
 .arrows button:hover {
-  background: #fff;
+  background: #840451;
   color: #000;
 }
 
@@ -238,8 +244,8 @@ body {
 .title {
   text-align: center;
   margin-bottom: 20px;
-  font-size: 5rem;
-  color: #333;
+  font-size: 3.5rem;
+  color: #ba1a72;
   font-weight: bold;
 }
 

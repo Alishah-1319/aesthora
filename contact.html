@@ -45,7 +45,7 @@
 
     .contact-box h2 {
       font-size: 2.2rem;
-      color: #111;
+      color: #b80c7e;
       font-weight: bold;
       font-family: Pacifico;
     }
@@ -85,19 +85,19 @@
     }
 
     .contact-box button {
-      background: linear-gradient(135deg, #ff6584, #6c63ff);
+      background: linear-gradient(135deg, #c00b90, #f78dc0);
       color: #fff;
       padding: 0.8rem 2rem;
       border: none;
       border-radius: 40px;
-      font-size: 1.1rem;
+      font-size: 1.5rem;
       cursor: pointer;
       font-family: 'Dancing Script', cursive;
       transition: all 0.3s ease-in-out;
     }
 
     .contact-box button:hover {
-      background: linear-gradient(135deg, #ff3366, #4e4eff);
+      background: linear-gradient(135deg, #b30a94, #ec7ac1);
       box-shadow: 0 0 20px rgba(108, 99, 255, 0.4);
     }
 
@@ -292,33 +292,64 @@
 </div>
 
 
+
   <div class="footer-bottom">
     © 2025 AESTHORA Art Gallery. All Rights Reserved.
   </div>
 </footer>
 <!-- footer end -->
 
+<!-- Validation Message Modal -->
+<div class="modal" id="validationModal">
+  <div class="modal-content" style="max-width: 400px; text-align: center;">
+    <span class="close" onclick="closeValidationModal()">&times;</span>
+    <h3 id="validationMessage" style="color:#aa1270; font-family:'times new roman', cursive; margin-bottom:15px;"></h3>
+    <button onclick="closeValidationModal()" 
+            style="background:linear-gradient(135deg, #c00b90, #f78dc0); color:#fff; border:none; padding:0.5rem 1.5rem; border-radius:30px; cursor:pointer;">
+      OK
+    </button>
+  </div>
+</div>
+
+
   <!-- Scripts -->
   <script>
-    function validateForm() {
-      const name = document.getElementById("name").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const message = document.getElementById("message").value.trim();
-      const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    function showValidationModal(message) {
+  document.getElementById("validationMessage").innerText = message;
+  document.getElementById("validationModal").style.display = "flex";
+}
 
-      if (!name || !email || !message) {
-        alert("Please fill out all fields.");
-        return false;
-      }
+function closeValidationModal() {
+  document.getElementById("validationModal").style.display = "none";
+}
 
-      if (!emailPattern.test(email)) {
-        alert("Please enter a valid email address.");
-        return false;
-      }
+function validateForm() {
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const message = document.getElementById("message").value.trim();
 
-      alert("🎉 Thank you! Your message has been sent.");
-      return true;
-    }
+  const namePattern = /^[A-Za-z\s'-]{2,50}$/;
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[a-z]{2,3}$/;
+
+  if (!name || !email || !message) {
+    showValidationModal("Please fill out all fields.");
+    return false;
+  }
+
+  if (!namePattern.test(name)) {
+    showValidationModal("Please enter a valid name (letters, spaces, hyphens, or apostrophes only).");
+    return false;
+  }
+
+  if (!emailPattern.test(email)) {
+    showValidationModal("Please enter a valid email address.");
+    return false;
+  }
+
+  showValidationModal("🎉 Thank you! Your message has been sent.");
+  return false; // Keep false if you don't want page reload
+}
+
 
     function openMap() {
       document.getElementById("mapModal").style.display = "flex";

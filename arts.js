@@ -64,7 +64,6 @@ const observer = new IntersectionObserver(entries => {
 
 observer.observe(endMarker);
 
-
 document.addEventListener("DOMContentLoaded", () => {
   const popObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {

@@ -48,10 +48,10 @@ background: radial-gradient(circle, rgba(255,101,132,0.3), transparent 70%);
   box-shadow: var(--box-shadow);
 }
 
-    .dark-mode-toggle {
+    /* .dark-mode-toggle {
   position: absolute;
-  /* bottom: 20px; */
-  /* top: 20px; */
+  /* bottom: 20px;
+  /* top: 20px; 
   margin-top: 90px;
   right: 20px;
   z-index: 1000;
@@ -68,7 +68,7 @@ background: radial-gradient(circle, rgba(255,101,132,0.3), transparent 70%);
 
 .dark-mode-toggle:hover {
   background: #555;
-}
+} */
 
 body.dark h1,
 body.dark h2 {
@@ -195,6 +195,7 @@ nav {
 @media (max-width: 768px) {
   .menu-toggle {
     display: block;
+     padding: 10px;
   }
 
   .nav-links {
@@ -379,7 +380,7 @@ nav {
         height: 180px;
       }
     }
-    .check-bot {
+    /* .check-bot {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -398,7 +399,7 @@ nav {
 }
 .check-bot {
   opacity: 0;
-}
+} */
 
 .gallery-item:hover .check-bot {
   opacity: 1;
@@ -576,7 +577,7 @@ nav {
    <!-- <button class="dark-mode-toggle" onclick="toggleDarkMode()">🌙 Toggle Mode</button> -->
 
   <div class="header">
-    <h1 class="animate__animated animate__zoomIn">Calligraphy Page</h1>
+    <h1 class="animate__animated animate__zoomIn">Calligraphy</h1>
     <p class="animate__animated animate__fadeIn animate__delay-1s">Explore the elegance and imagination behind each masterpiece</p>
   </div>
   <section class="image-generate-section" data-aos="fade-up">
@@ -588,73 +589,73 @@ nav {
 
   <section class="gallery-container">
     <div class="gallery-item" data-tagline="BismillahiRahmanirRaheem">
-  <div class="check-bot"><input type="checkbox" /></div>
+  <!-- <div class="check-bot"><input type="checkbox" /></div> -->
   <img src="images/img01.avif" alt="Art 1">
   <div class="overlay-text">Ink Harmony</div>
 </div>
 
 <div class="gallery-item" data-tagline="Ma Sha Allah">
-  <div class="check-bot"><input type="checkbox" /></div>
+  <!-- <div class="check-bot"><input type="checkbox" /></div> -->
   <img src="images/img05.jpg" alt="Art 2">
   <div class="overlay-text">Modern Lines</div>
 </div>
 
 <div class="gallery-item" data-tagline="La ilaha illa Allahu Muhammadur Rasool Allah">
-  <div class="check-bot"><input type="checkbox" /></div>
+  <!-- <div class="check-bot"><input type="checkbox" /></div> -->
   <img src="images/img04.jpg" alt="Art 3">
   <div class="overlay-text">Harmony Ink</div>
 </div>
 
 <div class="gallery-item" data-tagline="Alhamdulillah">
-  <div class="check-bot"><input type="checkbox" /></div>
+  <!-- <div class="check-bot"><input type="checkbox" /></div> -->
   <img src="images/img4.jpg" alt="Art 4">
   <div class="overlay-text">Spiritual Flow</div>
 </div>
 
 <div class="gallery-item" data-tagline="Labbaik Allahumma Labbaik">
-  <div class="check-bot"><input type="checkbox" /></div>
+  <!-- <div class="check-bot"><input type="checkbox" /></div> -->
   <img src="images/img6.jpeg" alt="Art 5">
   <div class="overlay-text">Classic Form</div>
 </div>
 
 <div class="gallery-item" data-tagline="Allahu Noor us Samawati wal Ard">
-  <div class="check-bot"><input type="checkbox" /></div>
+  <!-- <div class="check-bot"><input type="checkbox" /></div> -->
   <img src="images/img1.jpg" alt="Art 6">
   <div class="overlay-text">Flowing Beauty</div>
 </div>
 
 <div class="gallery-item" data-tagline="Fazkuruni Azkurkum Washkuruli Wala Takfiroon">
-  <div class="check-bot"><input type="checkbox" /></div>
+  <!-- <div class="check-bot"><input type="checkbox" /></div> -->
   <img src="images/img7.jpg" alt="Art 7">
   <div class="overlay-text">Golden Flourish</div>
 </div>
 
 <div class="gallery-item" data-tagline="Subhan Allahi Wabihamdihi SubhanAllah hil Azeem">
-  <div class="check-bot"><input type="checkbox" /></div>
+  <!-- <div class="check-bot"><input type="checkbox" /></div> -->
   <img src="images/img8.jpg" alt="Art 8">
   <div class="overlay-text">Silk Script</div>
 </div>
 
 <div class="gallery-item" data-tagline="Watu izzu man tashaa Watu zillu man tashaa">
-  <div class="check-bot"><input type="checkbox" /></div>
+  <!-- <div class="check-bot"><input type="checkbox" /></div> -->
   <img src="images/img13.webp" alt="Art 9">
   <div class="overlay-text">Classic Lines</div>
 </div>
 
 <div class="gallery-item" data-tagline="Hasbunallahu Wa ni'mal Wakeel">
-  <div class="check-bot"><input type="checkbox" /></div>
+  <!-- <div class="check-bot"><input type="checkbox" /></div> -->
   <img src="images/img11.webp" alt="Art 10">
   <div class="overlay-text">Soul of Ink</div>
 </div>
 
 <div class="gallery-item" data-tagline="La ilaha illa Anta Subhanaka inni kuntu min az-zalimeen">
-  <div class="check-bot"><input type="checkbox" /></div>
+  <!-- <div class="check-bot"><input type="checkbox" /></div> -->
   <img src="images/img19.jpg" alt="Art 11">
   <div class="overlay-text">Bold Motion</div>
 </div>
 
 <div class="gallery-item" data-tagline="Fa bi ayyi aalaaa i rabbikumaa tukaththibaan">
-  <div class="check-bot"><input type="checkbox" /></div>
+  <!-- <div class="check-bot"><input type="checkbox" /></div> -->
   <img src="images/img18.jpg" alt="Art 12">
   <div class="overlay-text">Sacred Verse</div>
 </div>
@@ -813,6 +814,7 @@ window.onclick = function (event) {
     items.forEach(item => observer.observe(item));
   </script>
   <script>
+
 document.querySelectorAll(".gallery-item").forEach(item => {
   item.addEventListener("mouseenter", () => {
     let tagline = item.getAttribute("data-tagline");

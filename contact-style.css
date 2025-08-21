@@ -68,7 +68,7 @@ body, html {
 
 /* Button */
 .contact-container button {
-  background: linear-gradient(135deg, #ff6584, #6c63ff);
+  background: linear-gradient(135deg, #c00b90, #f78dc0);
   border: none;
   color: #fff;
   padding: 0.8rem 2rem;
@@ -81,7 +81,7 @@ body, html {
 }
 
 .contact-container button:hover {
-  background: linear-gradient(135deg, #ff3366, #4e4eff);
+  background: linear-gradient(135deg, #ff3366, #f0b2e9);
   box-shadow: 0 0 30px rgba(108, 99, 255, 0.5);
 }
 

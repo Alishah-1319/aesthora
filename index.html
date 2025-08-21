@@ -171,7 +171,7 @@
     <div class="hero-text">
      <h1 class="slide-in-title"><span>AESTHORA</span> – The Art Within</h1>
       <p>Immerse yourself in captivating works curated for the soul.<br>Explore brilliance in brushstrokes, stories in colors.</p>
-      <button class="hero-btn"><a href="gallery.html" class="anch">Explore Gallery</a></button>
+      <button class="hero-btn"><a href="arts.html" class="anch">Explore Gallery</a></button>
     </div>
 </section> 
 <section class="image-generate-section" data-aos="fade-up">
@@ -277,7 +277,7 @@
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
-        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="photography.html">Gallery</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </div>
@@ -365,17 +365,38 @@ document.getElementById('voiceToggleBtn').addEventListener('click', function () 
   this.textContent = voiceEnabled ? "🔊 Voice: On" : "🔇 Voice: Off";
 });
 
-// Speak function
+let speechUnlocked = false;
+
+// Detect if it's a touch device
+const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+// Unlock speech only for mobile/touch devices
+if (isTouchDevice) {
+  document.addEventListener('touchstart', () => {
+    if (!speechUnlocked) {
+      const unlock = new SpeechSynthesisUtterance("");
+      speechSynthesis.speak(unlock);
+      speechUnlocked = true;
+    }
+  }, { once: true });
+} else {
+  // On desktop, always unlocked
+  speechUnlocked = true;
+}
+
 function speak(text) {
+  // On mobile: wait for unlock; on desktop: speak immediately
+  if (!speechUnlocked) return;
+
   const synth = window.speechSynthesis;
   const utterance = new SpeechSynthesisUtterance(text);
   utterance.lang = 'en-US';
-  if (selectedVoice) {
-    utterance.voice = selectedVoice;
-  }
+  if (selectedVoice) utterance.voice = selectedVoice;
   synth.cancel();
   synth.speak(utterance);
 }
+
+
 
 // Select a soft female voice
 function setFemaleVoice() {

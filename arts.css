@@ -1,8 +1,8 @@
-* {
+/* * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
+} */
 body {
   font-family: sans-serif;
   margin: 0;
@@ -21,7 +21,7 @@ body {
   text-align: center;
   margin-bottom: 20px;
   font-size: 5rem;
-  color: #333;
+  color: #ac135d;
 }
 /* navbar */
 /* Base layout */
@@ -145,7 +145,7 @@ nav {
 @media (max-width: 768px) {
   .menu-toggle {
     display: block;
-     padding: 50px;
+     padding: 10px;
   }
 
   .nav-links {
